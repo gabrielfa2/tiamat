@@ -28,7 +28,7 @@ function App() {
     }
   }, [isLoading]);
 
-  // Se estiver carregando, exibe a tela de introdução
+  // Se estiver carregando, exibe a tela de introduçã
   if (isLoading) {
     return <LoadingScreen onFinished={() => setIsLoading(false)} />;
   }
