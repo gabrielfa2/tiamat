@@ -12,7 +12,7 @@ const HeroImage = () => {
   return (
     // Container principal que define o aspect ratio e a imagem de fundo
     <div
-      className="relative w-full aspect-[3/2] bg-cover bg-center overflow-hidden"
+      className="relative w-full aspect-[2/2] bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       {/* Camada de sobreposição para escurecer a imagem e melhorar a legibilidade do texto */}
