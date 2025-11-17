@@ -55,7 +55,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-gray-900 border-b border-black /* <-- MUDANÇA: Cor do Header */
+        bg-gray-900 border-b border-gray-600 /* <-- MUDANÇA: Cor do Header */
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-40'
