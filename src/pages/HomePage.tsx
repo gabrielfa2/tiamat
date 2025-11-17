@@ -15,7 +15,6 @@ const HomePage = () => {
       <VideoSection />
       <CollectionsSection />
       <VideosSection />
-      <Footer />
     </>
   );
 };
