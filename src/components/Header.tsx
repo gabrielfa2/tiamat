@@ -46,7 +46,7 @@ const Header = () => {
       `}>
         <div className="flex w-max animate-scroll">
           {[...marqueeTexts, ...marqueeTexts, ...marqueeTexts].map((text, index) => (
-            <span key={index} className="mx-16 whitespace-nowrap">
+            <span key={index} className="mx-18 whitespace-nowrap">
               {text}
             </span>
           ))}
