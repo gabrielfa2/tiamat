@@ -61,7 +61,7 @@ const Header = () => {
           ? 'fixed top-0 left-0 right-0 z-40'
           : 'fixed left-0 right-0 z-40'
         }
-        ${isScrolled ? 'top-0' : 'top-12'}
+        ${isScrolled ? 'top-0' : 'top-0'}
       `}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-20">
