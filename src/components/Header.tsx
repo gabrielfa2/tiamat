@@ -14,6 +14,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isTeamsOpen, setIsTeamsOpen] = useState(false); // <-- NOVO ESTADO
   const [isVhiveOpen, setIsVhiveOpen] = useState(false);
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -55,7 +56,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-gray-900 border-b border-gray-600 /* <-- MUDANÇA: Cor do Header */
+        bg-slate-900 border-b border-slate-700
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-40'
@@ -79,17 +80,23 @@ const Header = () => {
               <button
                 onMouseEnter={() => setIsShopOpen(true)}
                 onMouseLeave={() => setIsShopOpen(false)}
-                className="font-semibold text-white hover:text-gray-300 transition-colors relative group" /* <-- MUDANÇA: Cor do Texto */
+                className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
               >
                 SHOP
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span> {/* <-- MUDANÇA: Cor do Sublinhado */}
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
-              <Link
-                to="/games"
-                className="font-semibold text-white hover:text-gray-300 transition-colors" /* <-- MUDANÇA: Cor do Texto */
+              
+              {/* --- MUDANÇA AQUI: Link "TEAMS" para Botão --- */}
+              <button
+                onMouseEnter={() => setIsTeamsOpen(true)}
+                onMouseLeave={() => setIsTeamsOpen(false)}
+                className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
               >
                 TEAMS
-              </Link>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
+              </button>
+              {/* --- FIM DA MUDANÇA --- */}
+
 
               {/* V.HIVE Dropdown */}
               <div
@@ -97,7 +104,7 @@ const Header = () => {
                 onMouseLeave={() => setIsVhiveOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   V.HIVE
                   <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -133,7 +140,7 @@ const Header = () => {
                 onMouseLeave={() => setIsPartnersOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   PARTNERS
                   <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -169,7 +176,7 @@ const Header = () => {
                 onMouseLeave={() => setIsAboutOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   ABOUT
                   <ChevronDown className={`h-4 w-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -202,23 +209,23 @@ const Header = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
-              <button className="hidden md:flex items-center gap-1 text-sm font-semibold text-white hover:text-gray-300 transition-colors"> {/* <-- MUDANÇA: Cor do Texto */}
+              <button className="hidden md:flex items-center gap-1 text-sm font-semibold text-white hover:text-gray-300 transition-colors">
                 ENGLISH
                 <ChevronDown className="h-4 w-4" />
               </button>
               <button onClick={() => setIsSearchOpen(true)}>
-                <Search className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
+                <Search className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
               </button>
               <Link to="/login">
-                <User className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
+                <User className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
               </Link>
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_CART' })}
                 className="relative"
               >
-                <ShoppingCart className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
+                <ShoppingCart className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
                 {getTotalItems() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"> {/* <-- MUDANÇA: Cor do Badge */}
+                  <span className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {getTotalItems()}
                   </span>
                 )}
@@ -227,7 +234,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mega Menu */}
+        {/* SHOP Mega Menu */}
         <div
           onMouseEnter={() => setIsShopOpen(true)}
           onMouseLeave={() => setIsShopOpen(false)}
@@ -391,6 +398,115 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        {/* --- NOVO MEGA MENU "TEAMS" --- */}
+        <div
+          onMouseEnter={() => setIsTeamsOpen(true)}
+          onMouseLeave={() => setIsTeamsOpen(false)}
+          className={`
+            bg-white border-t border-gray-200 shadow-lg
+            transition-all duration-300 ease-in-out
+            ${isTeamsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
+            overflow-hidden
+          `}
+        >
+          <div className="max-w-7xl mx-auto px-6 py-8">
+            <div className="grid grid-cols-12 gap-8">
+              {/* Coluna de Equipes Principais */}
+              <div className="col-span-2">
+                <h3 className="font-bold text-gray-900 mb-4 text-sm tracking-wider">
+                  PRINCIPAIS EQUIPES
+                </h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link to="/games/cs2/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Counter Strike 2
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/games/valorant/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Valorant
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/games/apex/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Apex Legends
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/games/rocket-league/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Rocket League
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/games" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Todas as Equipes
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Coluna de Outras Equipes */}
+              <div className="col-span-2">
+                <h3 className="font-bold text-gray-900 mb-4 text-sm tracking-wider">
+                  OUTRAS EQUIPES
+                </h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link to="/games/overwatch/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Overwatch 2
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/games/rainbow-six/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
+                      Rainbow Six Siege
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Imagem Destaque 1 (CS2) */}
+              <div className="col-span-4">
+                <Link to="/games/cs2/players" className="group block">
+                  <div className="relative aspect-[3/4] rounded overflow-hidden">
+                    <img
+                      src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="Equipe de Counter Strike 2"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-white font-bold text-sm tracking-wider">
+                        COUNTER STRIKE 2
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Imagem Destaque 2 (Valorant) */}
+              <div className="col-span-4">
+                <Link to="/games/valorant/players" className="group block">
+                  <div className="relative aspect-[3/4] rounded overflow-hidden">
+                    <img
+                      src="https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="Equipe de Valorant"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-white font-bold text-sm tracking-wider">
+                        VALORANT
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* --- FIM DO NOVO MEGA MENU --- */}
+
       </header>
 
       {/* Spacer to prevent content from hiding under fixed header */}
