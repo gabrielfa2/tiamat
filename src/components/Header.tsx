@@ -55,7 +55,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-white shadow-sm
+        bg-slate-900 border-b border-slate-700 /* <-- MUDANÇA: Cor do Header */
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-40'
@@ -79,14 +79,14 @@ const Header = () => {
               <button
                 onMouseEnter={() => setIsShopOpen(true)}
                 onMouseLeave={() => setIsShopOpen(false)}
-                className="font-semibold text-gray-900 hover:text-gray-600 transition-colors relative group"
+                className="font-semibold text-white hover:text-gray-300 transition-colors relative group" /* <-- MUDANÇA: Cor do Texto */
               >
                 SHOP
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gray-900 transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span> {/* <-- MUDANÇA: Cor do Sublinhado */}
               </button>
               <Link
                 to="/games"
-                className="font-semibold text-gray-900 hover:text-gray-600 transition-colors"
+                className="font-semibold text-white hover:text-gray-300 transition-colors" /* <-- MUDANÇA: Cor do Texto */
               >
                 TEAMS
               </Link>
@@ -97,7 +97,7 @@ const Header = () => {
                 onMouseLeave={() => setIsVhiveOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
                   V.HIVE
                   <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -133,7 +133,7 @@ const Header = () => {
                 onMouseLeave={() => setIsPartnersOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
                   PARTNERS
                   <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -169,7 +169,7 @@ const Header = () => {
                 onMouseLeave={() => setIsAboutOpen(false)}
                 className="relative"
               >
-                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1"> {/* <-- MUDANÇA: Cor do Texto */}
                   ABOUT
                   <ChevronDown className={`h-4 w-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -202,23 +202,23 @@ const Header = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
-              <button className="hidden md:flex items-center gap-1 text-sm font-semibold text-gray-900 hover:text-gray-600 transition-colors">
+              <button className="hidden md:flex items-center gap-1 text-sm font-semibold text-white hover:text-gray-300 transition-colors"> {/* <-- MUDANÇA: Cor do Texto */}
                 ENGLISH
                 <ChevronDown className="h-4 w-4" />
               </button>
               <button onClick={() => setIsSearchOpen(true)}>
-                <Search className="h-5 w-5 text-gray-900 hover:text-gray-600 cursor-pointer transition-colors" />
+                <Search className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
               </button>
               <Link to="/login">
-                <User className="h-5 w-5 text-gray-900 hover:text-gray-600 cursor-pointer transition-colors" />
+                <User className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
               </Link>
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_CART' })}
                 className="relative"
               >
-                <ShoppingCart className="h-5 w-5 text-gray-900 hover:text-gray-600 cursor-pointer transition-colors" />
+                <ShoppingCart className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" /> {/* <-- MUDANÇA: Cor do Texto */}
                 {getTotalItems() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  <span className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"> {/* <-- MUDANÇA: Cor do Badge */}
                     {getTotalItems()}
                   </span>
                 )}
