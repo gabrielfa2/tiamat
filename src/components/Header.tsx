@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'; // <-- Importa useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, User, ShoppingCart, ChevronDown } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
@@ -21,7 +21,7 @@ const Header = () => {
   const location = useLocation();
   const { state, dispatch } = useCart();
 
-  // --- MUDANÇA: Refs para os timers ---
+  // Refs para os timers
   const shopTimerRef = useRef<number | null>(null);
   const teamsTimerRef = useRef<number | null>(null);
 
@@ -39,7 +39,7 @@ const Header = () => {
     return state.items.reduce((total, item) => total + item.quantity, 0);
   };
 
-  // --- MUDANÇA: Funções de delay para os menus ---
+  // Funções de delay para os menus
   const menuDelay = 200; // 200ms de delay
 
   const handleMenuEnter = (setter: React.Dispatch<React.SetStateAction<boolean>>, timerRef: React.MutableRefObject<number | null>) => {
@@ -75,7 +75,8 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-slate-900 border-b border-slate-700
+        bg-slate-900 
+        shadow-lg shadow-black/30 /* <-- MUDANÇA AQUI: Substituída a borda pela sombra */
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-40'
@@ -97,7 +98,6 @@ const Header = () => {
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8 relative">
               <button
-                // --- MUDANÇA: Handlers do SHOP atualizados ---
                 onMouseEnter={() => handleMenuEnter(setIsShopOpen, shopTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsShopOpen, shopTimerRef)}
                 className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
@@ -107,7 +107,6 @@ const Header = () => {
               </button>
               
               <button
-                // --- MUDANÇA: Handlers do TEAMS atualizados ---
                 onMouseEnter={() => handleMenuEnter(setIsTeamsOpen, teamsTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsTeamsOpen, teamsTimerRef)}
                 className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
@@ -116,7 +115,7 @@ const Header = () => {
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
 
-              {/* V.HIVE Dropdown (usa o wrapper div, que já funciona) */}
+              {/* V.HIVE Dropdown */}
               <div
                 onMouseEnter={() => setIsVhiveOpen(true)}
                 onMouseLeave={() => setIsVhiveOpen(false)}
@@ -140,7 +139,7 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* PARTNERS Dropdown (usa o wrapper div) */}
+              {/* PARTNERS Dropdown */}
               <div
                 onMouseEnter={() => setIsPartnersOpen(true)}
                 onMouseLeave={() => setIsPartnersOpen(false)}
@@ -164,7 +163,7 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* ABOUT Dropdown (usa o wrapper div) */}
+              {/* ABOUT Dropdown */}
               <div
                 onMouseEnter={() => setIsAboutOpen(true)}
                 onMouseLeave={() => setIsAboutOpen(false)}
@@ -215,10 +214,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-
-        {/* --- MUDANÇA: Mega Menus MOVIDOS para fora da nav,
-                       para terem 100% de largura
-                       e com novos Handlers --- */}
         
         {/* SHOP Mega Menu */}
         <div
@@ -361,7 +356,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-        {/* --- FIM DOS MEGA MENUS --- */}
         
       </header>
 
