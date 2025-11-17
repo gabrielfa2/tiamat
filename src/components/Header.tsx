@@ -14,6 +14,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isVhiveOpen, setIsVhiveOpen] = useState(false);
+  const [isPartnersOpen, setIsPartnersOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const location = useLocation();
   const { state, dispatch } = useCart();
 
@@ -72,7 +75,7 @@ const Header = () => {
             </Link>
 
             {/* Navigation Links */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8 relative">
               <button
                 onMouseEnter={() => setIsShopOpen(true)}
                 onMouseLeave={() => setIsShopOpen(false)}
@@ -87,24 +90,114 @@ const Header = () => {
               >
                 TEAMS
               </Link>
-              <Link
-                to="/about"
-                className="font-semibold text-gray-900 hover:text-gray-600 transition-colors"
+
+              {/* V.HIVE Dropdown */}
+              <div
+                onMouseEnter={() => setIsVhiveOpen(true)}
+                onMouseLeave={() => setIsVhiveOpen(false)}
+                className="relative"
               >
-                V.HIVE
-              </Link>
-              <Link
-                to="/about"
-                className="font-semibold text-gray-900 hover:text-gray-600 transition-colors"
+                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                  V.HIVE
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isVhiveOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
+                  <ul className="py-2">
+                    <li>
+                      <Link to="/vhive/paris" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        V.Hive Paris
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/vhive/bootcamp" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        V.Bootcamp
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/vhive/shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        V.Shop
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* PARTNERS Dropdown */}
+              <div
+                onMouseEnter={() => setIsPartnersOpen(true)}
+                onMouseLeave={() => setIsPartnersOpen(false)}
+                className="relative"
               >
-                PARTNERS
-              </Link>
-              <Link
-                to="/about"
-                className="font-semibold text-gray-900 hover:text-gray-600 transition-colors"
+                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                  PARTNERS
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isPartnersOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
+                  <ul className="py-2">
+                    <li>
+                      <Link to="/partners/esports" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        Esports Partners
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/partners/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        Brand Partners
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/partners/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        Contact Us
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* ABOUT Dropdown */}
+              <div
+                onMouseEnter={() => setIsAboutOpen(true)}
+                onMouseLeave={() => setIsAboutOpen(false)}
+                className="relative"
               >
-                ABOUT
-              </Link>
+                <button className="font-semibold text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-1">
+                  ABOUT
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isAboutOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
+                  <ul className="py-2">
+                    <li>
+                      <Link to="/about/company" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        About Us
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about/story" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        Our Story
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </nav>
 
             {/* Right Side Icons */}
