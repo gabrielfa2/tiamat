@@ -55,7 +55,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-white shadow-sm
+        bg-black shadow-sm
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-40'
