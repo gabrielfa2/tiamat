@@ -24,6 +24,9 @@ const Header = () => {
   // Refs para os timers
   const shopTimerRef = useRef<number | null>(null);
   const teamsTimerRef = useRef<number | null>(null);
+  const vhiveTimerRef = useRef<number | null>(null);
+  const partnersTimerRef = useRef<number | null>(null);
+  const aboutTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,20 +120,24 @@ const Header = () => {
 
               {/* V.HIVE Dropdown */}
               <div
-                onMouseEnter={() => setIsVhiveOpen(true)}
-                onMouseLeave={() => setIsVhiveOpen(false)}
+                onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
+                onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
                 className="relative"
               >
                 <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   V.HIVE
                   <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div className={`
-                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                  transition-all duration-300 ease-in-out z-50
-                  ${isVhiveOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
-                  mt-2 min-w-48 overflow-hidden
-                `}>
+                <div
+                  onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
+                  onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
+                  className={`
+                    absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                    transition-all duration-300 ease-in-out z-50
+                    ${isVhiveOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                    mt-2 min-w-48 overflow-hidden
+                  `}
+                >
                   <ul className="py-2">
                     <li><Link to="/vhive/paris" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Hive Paris</Link></li>
                     <li><Link to="/vhive/bootcamp" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Bootcamp</Link></li>
@@ -141,20 +148,24 @@ const Header = () => {
 
               {/* PARTNERS Dropdown */}
               <div
-                onMouseEnter={() => setIsPartnersOpen(true)}
-                onMouseLeave={() => setIsPartnersOpen(false)}
+                onMouseEnter={() => handleMenuEnter(setIsPartnersOpen, partnersTimerRef)}
+                onMouseLeave={() => handleMenuLeave(setIsPartnersOpen, partnersTimerRef)}
                 className="relative"
               >
                 <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   PARTNERS
                   <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div className={`
-                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                  transition-all duration-300 ease-in-out z-50
-                  ${isPartnersOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
-                  mt-2 min-w-48 overflow-hidden
-                `}>
+                <div
+                  onMouseEnter={() => handleMenuEnter(setIsPartnersOpen, partnersTimerRef)}
+                  onMouseLeave={() => handleMenuLeave(setIsPartnersOpen, partnersTimerRef)}
+                  className={`
+                    absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                    transition-all duration-300 ease-in-out z-50
+                    ${isPartnersOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                    mt-2 min-w-48 overflow-hidden
+                  `}
+                >
                   <ul className="py-2">
                     <li><Link to="/partners/esports" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Esports Partners</Link></li>
                     <li><Link to="/partners/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Brand Partners</Link></li>
@@ -165,20 +176,24 @@ const Header = () => {
 
               {/* ABOUT Dropdown */}
               <div
-                onMouseEnter={() => setIsAboutOpen(true)}
-                onMouseLeave={() => setIsAboutOpen(false)}
+                onMouseEnter={() => handleMenuEnter(setIsAboutOpen, aboutTimerRef)}
+                onMouseLeave={() => handleMenuLeave(setIsAboutOpen, aboutTimerRef)}
                 className="relative"
               >
                 <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
                   ABOUT
                   <ChevronDown className={`h-4 w-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div className={`
-                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                  transition-all duration-300 ease-in-out z-50
-                  ${isAboutOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
-                  mt-2 min-w-48 overflow-hidden
-                `}>
+                <div
+                  onMouseEnter={() => handleMenuEnter(setIsAboutOpen, aboutTimerRef)}
+                  onMouseLeave={() => handleMenuLeave(setIsAboutOpen, aboutTimerRef)}
+                  className={`
+                    absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                    transition-all duration-300 ease-in-out z-50
+                    ${isAboutOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
+                    mt-2 min-w-48 overflow-hidden
+                  `}
+                >
                   <ul className="py-2">
                     <li><Link to="/about/company" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">About Us</Link></li>
                     <li><Link to="/about/story" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Our Story</Link></li>
