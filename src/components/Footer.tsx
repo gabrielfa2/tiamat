@@ -3,7 +3,10 @@ import { Twitter, Linkedin, Github, Youtube, Slack, Globe } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-black text-white py-16 overflow-hidden">
+    <footer className="relative text-white py-16 overflow-hidden">
+      {/* Base Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black via-20% to-black"></div>
+
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/20 to-purple-600/20 rounded-full blur-3xl"></div>
@@ -18,9 +21,9 @@ const Footer = () => {
             <div className="relative w-32 h-32 mx-auto lg:mx-0 mb-8">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-purple-600 to-blue-600 p-1">
                 <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-                  <img 
-                    src="/logo.png" 
-                    alt="Tiamat" 
+                  <img
+                    src="/logo.png"
+                    alt="Tiamat"
                     className="w-16 h-16 object-contain"
                   />
                 </div>
@@ -92,9 +95,9 @@ const Footer = () => {
             <div className="text-gray-500 text-sm">
               <p className="mb-2">Copyright © 2025 Tiamat Labs. All rights reserved.</p>
               <div className="flex items-center justify-center lg:justify-end gap-2">
-                <img 
-                  src="/logo.png" 
-                  alt="Tiamat" 
+                <img
+                  src="/logo.png"
+                  alt="Tiamat"
                   className="w-4 h-4 object-contain"
                 />
                 <span>Made with passion and Tiamat</span>

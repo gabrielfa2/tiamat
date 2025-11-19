@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/intro.mp4';
+const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotelainicial.mp4';
 
 interface LoadingScreenProps {
   onFinished: () => void;

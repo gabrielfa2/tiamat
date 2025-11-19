@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VideoSection = () => {
-  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4';
+  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videositematheus.mp4';
   const posterUrl = '/bannertemp.png';
 
   return (
@@ -9,7 +9,7 @@ const VideoSection = () => {
       {/* 👇 AQUI ESTÁ A ALTERAÇÃO 👇 */}
       {/* Trocamos 'max-w-screen-xl' por 'max-w-screen-2xl' para aumentar a largura */}
       <div className="max-w-screen-4xl mx-auto">
-        <div className="rounded-2xl overflow-hidden">
+        <div className="relative rounded-2xl overflow-hidden">
           <video
             className="w-full"
             src={videoUrl}
@@ -21,6 +21,12 @@ const VideoSection = () => {
           >
             Seu navegador não suporta o elemento de vídeo.
           </video>
+
+          {/* Gradient Overlays */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0f172a] to-transparent pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f172a] to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#0f172a] to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#0f172a] to-transparent pointer-events-none"></div>
         </div>
       </div>
     </section>

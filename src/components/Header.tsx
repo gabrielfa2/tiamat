@@ -108,7 +108,7 @@ const Header = () => {
                 SHOP
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
-              
+
               <button
                 onMouseEnter={() => handleMenuEnter(setIsTeamsOpen, teamsTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsTeamsOpen, teamsTimerRef)}
@@ -229,7 +229,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        
+
         {/* SHOP Mega Menu */}
         <div
           onMouseEnter={() => handleMenuEnter(setIsShopOpen, shopTimerRef)}
@@ -237,7 +237,7 @@ const Header = () => {
           className={`
             absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg
             transition-all duration-300 ease-in-out
-            ${isShopOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
+            ${isShopOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
             overflow-hidden
           `}
         >
@@ -315,7 +315,7 @@ const Header = () => {
           className={`
             absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg
             transition-all duration-300 ease-in-out
-            ${isTeamsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
+            ${isTeamsOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
             overflow-hidden
           `}
         >
@@ -371,7 +371,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        
+
       </header>
 
       {/* Spacer to prevent content from hiding under fixed header */}
