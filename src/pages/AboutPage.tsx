@@ -4,7 +4,7 @@ import { Trophy, Users, Target, Zap, Globe, Award } from 'lucide-react';
 const AboutPage = () => {
   const stats = [
     { label: 'Championships Won', value: '15+', icon: Trophy },
-    { label: 'Professional Players', value: '30+', icon: Users },
+    { label: 'Professional Players', value: '5', icon: Users },
     { label: 'Years of Excellence', value: '5', icon: Award },
     { label: 'Global Fans', value: '500K+', icon: Globe }
   ];
