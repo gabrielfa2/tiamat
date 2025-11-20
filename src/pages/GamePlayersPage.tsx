@@ -84,10 +84,10 @@ const GamePlayersPage = () => {
         },
         {
           id: 3,
-          name: 'SOVA',
-          realName: 'Diego Martins',
+          name: 'SENTINELA',
+          realName: 'Eduardo Masquerano ',
           role: 'Initiator',
-          image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
+          image: '/masqw.png',
           stats: { kd: '1.05', rating: '1.22', headshot: '19%' },
           achievements: ['Masters Berlin 2024', 'VCT Stage 2']
         },
