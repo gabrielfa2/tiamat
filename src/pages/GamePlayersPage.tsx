@@ -75,10 +75,10 @@ const GamePlayersPage = () => {
         },
         {
           id: 2,
-          name: 'SAGE',
-          realName: 'Ana Ferreira',
+          name: 'INICIADOR',
+          realName: 'Myrlla',
           role: 'Sentinel',
-          image: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=400',
+          image: '/myrla.png',
           stats: { kd: '1.12', rating: '1.15', headshot: '22%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         },
