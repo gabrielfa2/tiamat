@@ -66,7 +66,7 @@ const GamePlayersPage = () => {
       players: [
         {
           id: 1,
-          name: 'PHOENIX',
+          name: 'DUELISTA',
           realName: 'Gabriel',
           role: 'Duelist',
           image: '/gabriel.png',
