@@ -94,7 +94,7 @@ const GamePlayersPage = () => {
         {
           id: 4,
           name: 'CONTROLADOR',
-          realName: 'FERNANDA COSTA',
+          realName: 'Fernanda Costa',
           role: 'Controller',
           image: '/fer.PNG',
           stats: { kd: '0.98', rating: '1.18', headshot: '21%' },
