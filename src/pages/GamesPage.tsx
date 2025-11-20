@@ -15,7 +15,7 @@ const GamesPage = () => {
       players: 5,
       achievements: ['IEM Katowice 2024', 'BLAST Premier 2024'],
       description: 'Our CS2 team dominates the competitive scene with precision, strategy and teamwork.',
-      status: 'active'
+      status: 'inactive'
     },
     {
       id: 'valorant',
@@ -37,7 +37,7 @@ const GamesPage = () => {
       players: 3,
       achievements: ['ALGS Championship 2024'],
       description: 'Fast-paced battle royale action with our elite Apex Legends squad.',
-      status: 'active'
+      status: 'inactive'
     },
     {
       id: 'rocket-league',
@@ -48,7 +48,7 @@ const GamesPage = () => {
       players: 3,
       achievements: ['RLCS World Championship 2024'],
       description: 'Aerial mastery and precise teamwork define our Rocket League team.',
-      status: 'active'
+      status: 'inactive'
     },
     {
       id: 'overwatch',
@@ -59,7 +59,7 @@ const GamesPage = () => {
       players: 5,
       achievements: ['OWL Season 2024'],
       description: 'Strategic gameplay and hero mastery in the Overwatch League.',
-      status: 'active'
+      status: 'inactive'
     },
     {
       id: 'rainbow-six',
@@ -70,7 +70,7 @@ const GamesPage = () => {
       players: 5,
       achievements: ['Six Invitational 2024'],
       description: 'Tactical FPS excellence with our Rainbow Six Siege roster.',
-      status: 'active'
+      status: 'inactive'
     }
   ];
 
@@ -88,18 +88,26 @@ const GamesPage = () => {
         {/* Games Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {games.map(game => (
-            <div 
+            <div
               key={game.id}
-              onClick={() => navigate(`/games/${game.id}/players`)}
-              className="group cursor-pointer"
+              onClick={() => game.status === 'active' && navigate(`/games/${game.id}/players`)}
+              className={game.status === 'active' ? "group cursor-pointer" : "group cursor-not-allowed opacity-60"}
             >
-              <div className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-purple-500 transition-all duration-300">
+              <div className={`relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border transition-all duration-300 ${
+                game.status === 'active'
+                  ? 'border-slate-700 hover:border-purple-500'
+                  : 'border-slate-700'
+              }`}>
                 {/* Background Image */}
                 <div className="absolute inset-0">
-                  <img 
-                    src={game.background} 
+                  <img
+                    src={game.background}
                     alt={game.name}
-                    className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                    className={`w-full h-full object-cover ${
+                      game.status === 'active'
+                        ? 'opacity-20 group-hover:opacity-30'
+                        : 'opacity-10'
+                    } transition-opacity duration-300`}
                   />
                 </div>
 
@@ -108,17 +116,25 @@ const GamesPage = () => {
 
                 {/* Game Logo */}
                 <div className="absolute top-6 left-6">
-                  <img 
-                    src={game.image} 
+                  <img
+                    src={game.image}
                     alt={game.shortName}
-                    className="h-16 w-16 object-contain filter brightness-0 invert group-hover:filter-none group-hover:drop-shadow-glow-purple transition-all duration-300"
+                    className={`h-16 w-16 object-contain ${
+                      game.status === 'active'
+                        ? 'filter brightness-0 invert group-hover:filter-none group-hover:drop-shadow-glow-purple transition-all duration-300'
+                        : 'filter brightness-0 invert opacity-60'
+                    }`}
                   />
                 </div>
 
                 {/* Status Badge */}
                 <div className="absolute top-6 right-6">
-                  <span className="bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full">
-                    ACTIVE
+                  <span className={`text-white px-3 py-1 text-xs font-bold rounded-full ${
+                    game.status === 'active'
+                      ? 'bg-green-600'
+                      : 'bg-gray-600'
+                  }`}>
+                    {game.status === 'active' ? 'ACTIVE' : 'COMING SOON'}
                   </span>
                 </div>
 
@@ -126,7 +142,7 @@ const GamesPage = () => {
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-white text-2xl font-bold mb-2">{game.name}</h3>
                   <p className="text-gray-300 text-sm mb-4 line-clamp-2">{game.description}</p>
-                  
+
                   {/* Stats */}
                   <div className="flex items-center gap-4 text-sm text-gray-400">
                     <div className="flex items-center gap-1">
@@ -151,7 +167,9 @@ const GamesPage = () => {
                 </div>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                {game.status === 'active' && (
+                  <div className="absolute inset-0 bg-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                )}
               </div>
             </div>
           ))}
