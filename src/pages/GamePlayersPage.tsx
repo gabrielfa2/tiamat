@@ -67,7 +67,7 @@ const GamePlayersPage = () => {
         {
           id: 1,
           name: 'DUELISTA',
-          realName: 'Gabriel',
+          realName: 'Gabriel Araújo',
           role: 'Duelist',
           image: '/gabriel.png',
           stats: { kd: '1.38', rating: '1.28', headshot: '44%' },
@@ -76,7 +76,7 @@ const GamePlayersPage = () => {
         {
           id: 2,
           name: 'INICIADOR',
-          realName: 'Myrlla',
+          realName: 'Myrlla Gurgel',
           role: 'Sentinel',
           image: '/myrlla.png',
           stats: { kd: '1.12', rating: '1.15', headshot: '22%' },
