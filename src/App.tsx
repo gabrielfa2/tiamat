@@ -12,11 +12,14 @@ import GamesPage from './pages/GamesPage';
 import AboutPage from './pages/AboutPage';
 import GamePlayersPage from './pages/GamePlayersPage';
 import LoginPage from './pages/LoginPage';
-import ContactPage from './pages/ContactPage'; // <--- IMPORTANTE: Importe o novo componente
+import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import { usePageFocus } from './usePageFocus';
 import LoadingScreen from './components/LoadingScreen';
 import RecruitmentPage from './pages/RecruitmentPage';
+import RankingPage from './pages/RankingPage';
+import HighlightsPage from './pages/HighlightsPage';
+import LastTourPage from './pages/LastTourPage';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -32,10 +35,12 @@ const MainLayout = () => {
         <Route path="/products/:productId" element={<ProductDetailPage />} />
         <Route path="/games" element={<GamesPage />} />
         <Route path="/about" element={<AboutPage />} />
-        {/* --- NOVA ROTA ADICIONADA --- */}
-        <Route path="/about/contact" element={<ContactPage />} /> 
+        <Route path="/about/contact" element={<ContactPage />} />
         <Route path="/recruitment" element={<RecruitmentPage />} />
         <Route path="/games/:gameId/players" element={<GamePlayersPage />} />
+        <Route path="/ranking" element={<RankingPage />} />
+        <Route path="/highlights" element={<HighlightsPage />} />
+        <Route path="/last-tour" element={<LastTourPage />} />
       </Routes>
 
       {!isHomePage && <Footer />}

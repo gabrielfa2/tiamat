@@ -51,10 +51,10 @@ interface CollectionCardProps {
     colSpan: string;
   };
   index: number;
-  onGamesClick?: () => void;
+  onCollectionClick?: (title: string) => void;
 }
 
-const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index, onGamesClick }) => {
+const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index, onCollectionClick }) => {
   const [ref, isVisible] = useScrollAnimation();
 
   // Define a direção da animação com base no índice (par ou ímpar)
@@ -66,8 +66,8 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index, onGa
     : `opacity-0 ${isLeft ? '-translate-x-16' : 'translate-x-16'}`; // Estado inicial: invisível e deslocado
 
   const handleClick = () => {
-    if (collection.title === 'GAMES' && onGamesClick) {
-      onGamesClick();
+    if (onCollectionClick) {
+      onCollectionClick(collection.title);
     }
   };
 
@@ -132,6 +132,25 @@ const CollectionsSection = () => {
     navigate('/games');
   };
 
+  const handleCollectionClick = (title: string) => {
+    switch (title) {
+      case 'GAMES':
+        navigate('/games');
+        break;
+      case 'RANKING':
+        navigate('/ranking');
+        break;
+      case 'HIGHLIGHTS':
+        navigate('/highlights');
+        break;
+      case 'LAST TOUR':
+        navigate('/last-tour');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <section className="py-6 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -142,7 +161,7 @@ const CollectionsSection = () => {
               key={index}
               collection={collection}
               index={index}
-              onGamesClick={handleGamesClick}
+              onCollectionClick={handleCollectionClick}
             />
           ))}
         </div>
