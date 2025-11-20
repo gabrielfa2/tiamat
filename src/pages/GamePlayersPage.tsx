@@ -93,10 +93,10 @@ const GamePlayersPage = () => {
         },
         {
           id: 4,
-          name: 'OMEN',
-          realName: 'Carlos Souza',
+          name: 'CONTROLADOR',
+          realName: 'FERNANDA COSTA',
           role: 'Controller',
-          image: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=400',
+          image: '/fer.png',
           stats: { kd: '0.98', rating: '1.18', headshot: '21%' },
           achievements: ['VCT Champions 2024', 'Masters Reykjavik']
         },
