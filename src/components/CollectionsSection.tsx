@@ -153,7 +153,7 @@ const CollectionsSection = () => {
       title: 'HIGHLIGHTS',
       image: 'https://images.pexels.com/photos/2787341/pexels-photo-2787341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       // 👇 COLE O LINK PÚBLICO DO SEU VÍDEO AQUI
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4', 
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/highliught.mp4', 
       gradient: 'from-indigo-600 to-purple-500',
       colSpan: 'md:col-span-2',
     },
