@@ -71,7 +71,7 @@ const AboutPage = () => {
       <div className="relative h-96 mb-16 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1200)' }}
+          style={{ backgroundImage: 'url(' }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-blue-900/80"></div>
         </div>
