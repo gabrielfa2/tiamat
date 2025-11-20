@@ -96,7 +96,7 @@ const GamePlayersPage = () => {
           name: 'CONTROLADOR',
           realName: 'FERNANDA COSTA',
           role: 'Controller',
-          image: '/fer.png',
+          image: '/fer.PNG',
           stats: { kd: '0.98', rating: '1.18', headshot: '21%' },
           achievements: ['VCT Champions 2024', 'Masters Reykjavik']
         },
