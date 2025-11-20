@@ -66,7 +66,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="pt-32 pb-1">
+    <div className="pt-1 pb-1">
       {/* Hero Section */}
       <div className="relative h-96 mb-16 overflow-hidden">
         <div 
