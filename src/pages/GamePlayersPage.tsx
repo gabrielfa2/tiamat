@@ -70,7 +70,7 @@ const GamePlayersPage = () => {
           realName: 'Gabriel',
           role: 'Duelist',
           image: '/gabriel.png',
-          stats: { kd: '1.38', rating: '1.28', headshot: '24%' },
+          stats: { kd: '1.38', rating: '1.28', headshot: '44%' },
           achievements: ['VCT Champions 2024', 'Masters Berlin 2024']
         },
         {
