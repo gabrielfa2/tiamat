@@ -9,7 +9,8 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import GamesPage from './pages/GamesPage';
 import AboutPage from './pages/AboutPage';
 import GamePlayersPage from './pages/GamePlayersPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage
+import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import { usePageFocus } from './usePageFocus';
 import LoadingScreen from './components/LoadingScreen';
@@ -36,7 +37,8 @@ const MainLayout = () => {
         <Route path="/products/:productId" element={<ProductDetailPage />} />
         <Route path="/games" element={<GamesPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/games/:gameId/players" element={<GamePlayersPage />} />
+        <Route path="/games/:gameId/players" element={<GamePlayersPage />} 
+        <Route path="/about/contact" element={<ContactPage />} />
       </Routes>
 
       {/* Footer é renderizado em todas as páginas, exceto a Home */}
