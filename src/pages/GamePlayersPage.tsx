@@ -105,7 +105,7 @@ const GamePlayersPage = () => {
           name: 'JETT',
           realName: 'Beatriz Sales',
           role: 'Duelist',
-          image: '/bia.PNG',
+          image: '/bia.png',
           stats: { kd: '1.42', rating: '1.35', headshot: '26%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         }
