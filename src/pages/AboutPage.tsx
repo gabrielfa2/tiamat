@@ -172,22 +172,6 @@ const AboutPage = () => {
             </div>
           </div>
         </div>
-
-        {/* Contact CTA */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-8 rounded-lg">
-            <h2 className="text-3xl font-bold text-white mb-4">READY TO JOIN THE LEGEND?</h2>
-            <p className="text-gray-200 mb-6">Whether you're a player, sponsor, or fan, there's a place for you in the Tiamat family.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-purple-600 px-8 py-3 font-bold rounded hover:bg-gray-100 transition-colors">
-                CONTACT US
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 font-bold rounded hover:bg-white hover:text-purple-600 transition-colors">
-                VIEW CAREERS
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
