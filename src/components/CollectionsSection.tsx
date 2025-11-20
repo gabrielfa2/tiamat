@@ -161,7 +161,7 @@ const CollectionsSection = () => {
       title: 'LAST TOUR',
       image: 'https://images.pexels.com/photos/3757955/pexels-photo-3757955.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       // 👇 COLE O LINK PÚBLICO DO SEU VÍDEO AQUI
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4', 
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/lasttour.mp4'', 
       gradient: 'from-red-500 to-orange-500',
       colSpan: 'md:col-span-1',
     }
