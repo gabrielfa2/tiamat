@@ -284,8 +284,8 @@ const Header = () => {
                   OUTRAS EQUIPES
                 </h3>
                 <ul className="space-y-3">
-                  <li><Link to="/games/overwatch/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Overwatch 2</Link></li>
-                  <li><Link to="/games/rainbow-six/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Rainbow Six Siege</Link></li>
+                  <li><Link to="/recruitment" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Overwatch 2</Link></li>
+                  <li><Link to="/recruitment" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Rainbow Six Siege</Link></li>
                 </ul>
               </div>
               {/* Imagem Destaque 1 (CS2) */}
