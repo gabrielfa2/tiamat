@@ -139,8 +139,8 @@ const Header = () => {
                   `}
                 >
                   <ul className="py-2">
-                    <li><Link to="/about/company" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">About Us</Link></li>
-                    <li><Link to="/about/story" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Our Story</Link></li>
+                    <li><Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">About Us</Link></li>
+                    <li><Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Our Story</Link></li>
                     <li><Link to="/about/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Contact</Link></li>
                   </ul>
                 </div>
