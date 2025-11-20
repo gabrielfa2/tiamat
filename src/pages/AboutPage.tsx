@@ -155,23 +155,6 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
-
-        {/* Team Photo Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">THE TIAMAT FAMILY</h2>
-          <div className="relative aspect-video rounded-lg overflow-hidden">
-            <img 
-              src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1200" 
-              alt="Tiamat Team"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-8 left-8">
-              <h3 className="text-white text-2xl font-bold mb-2">UNITED BY VICTORY</h3>
-              <p className="text-gray-200">Our players, coaches, and staff working together towards greatness</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
