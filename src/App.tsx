@@ -16,6 +16,7 @@ import ContactPage from './pages/ContactPage'; // <--- IMPORTANTE: Importe o nov
 import Footer from './components/Footer';
 import { usePageFocus } from './usePageFocus';
 import LoadingScreen from './components/LoadingScreen';
+import RecruitmentPage from './pages/RecruitmentPage';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -33,7 +34,7 @@ const MainLayout = () => {
         <Route path="/about" element={<AboutPage />} />
         {/* --- NOVA ROTA ADICIONADA --- */}
         <Route path="/about/contact" element={<ContactPage />} /> 
-        
+        <Route path="/recruitment" element={<RecruitmentPage />} />
         <Route path="/games/:gameId/players" element={<GamePlayersPage />} />
       </Routes>
 
