@@ -11,13 +11,14 @@ const HomePage = () => {
   return (
     <>
       <HeroSlider />
-      <ProductsSection />
       <VideoSection />
       <TeamBanner />
+      <ProductsSection />
       <CollectionsSection />
       <Footer/>
     </>
   );
 };
+
 
 export default HomePage;
