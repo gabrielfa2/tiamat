@@ -67,9 +67,9 @@ const GamePlayersPage = () => {
         {
           id: 1,
           name: 'PHOENIX',
-          realName: 'Gabriel Rocha',
+          realName: 'Gabriel',
           role: 'Duelist',
-          image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
+          image: '/gabriel.png',
           stats: { kd: '1.38', rating: '1.28', headshot: '24%' },
           achievements: ['VCT Champions 2024', 'Masters Berlin 2024']
         },
