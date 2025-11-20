@@ -129,7 +129,7 @@ const CollectionsSection = () => {
     {
       title: 'GAMES',
       // Usei o mesmo link de exemplo para todos, mas você deve substituir pelos seus específicos
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4', 
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/gamespronto.mp4', 
       gradient: 'from-purple-600 to-pink-500',
       colSpan: 'md:col-span-1',
     },
@@ -141,13 +141,13 @@ const CollectionsSection = () => {
     },
     {
       title: 'HIGHLIGHTS',
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4',
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/highliught.mp4',
       gradient: 'from-indigo-600 to-purple-500',
       colSpan: 'md:col-span-2',
     },
     {
       title: 'LAST TOUR',
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4',
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/lasttour.mp4',
       gradient: 'from-red-500 to-orange-500',
       colSpan: 'md:col-span-1',
     }
