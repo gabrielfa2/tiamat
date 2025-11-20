@@ -71,7 +71,7 @@ const AboutPage = () => {
       <div className="relative h-96 mb-16 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(' }}
+          style={{ backgroundImage: 'bannertemp.png' }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-blue-900/80"></div>
         </div>
