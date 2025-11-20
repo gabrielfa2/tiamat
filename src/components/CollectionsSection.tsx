@@ -135,7 +135,7 @@ const CollectionsSection = () => {
   const collections = [
     {
       title: 'GAMES',
-      image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/games.mp4',
       // 👇 COLE O LINK PÚBLICO DO SEU VÍDEO AQUI
       videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4', 
       gradient: 'from-purple-600 to-pink-500',
