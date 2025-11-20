@@ -271,10 +271,10 @@ const Header = () => {
                   PRINCIPAIS EQUIPES
                 </h3>
                 <ul className="space-y-3">
-                  <li><Link to="/games/cs2/pl" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Counter Strike 2</Link></li>
+                  <li><Link to="/pages/RecruitmentPage" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Counter Strike 2</Link></li>
                   <li><Link to="/games/valorant/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Valorant</Link></li>
-                  <li><Link to="/games/apex/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Apex Legends</Link></li>
-                  <li><Link to="/games/rocket-league/players" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Rocket League</Link></li>
+                  <li><Link to="/pages/RecruitmentPage" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Apex Legends</Link></li>
+                  <li><Link to="/pages/RecruitmentPage" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Rocket League</Link></li>
                   <li><Link to="/games" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Todas as Equipes</Link></li>
                 </ul>
               </div>
