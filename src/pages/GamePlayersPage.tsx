@@ -78,7 +78,7 @@ const GamePlayersPage = () => {
           name: 'INICIADOR',
           realName: 'Myrlla',
           role: 'Sentinel',
-          image: '/myrla.png',
+          image: '/myrlla.png',
           stats: { kd: '1.12', rating: '1.15', headshot: '22%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         },
