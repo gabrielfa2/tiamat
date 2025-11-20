@@ -103,9 +103,10 @@ const GamePlayersPage = () => {
         {
           id: 5,
           name: 'JETT',
-          realName: 'Mariana Silva',
+          realName: 'Beatriz Sales',
           role: 'Duelist',
-          image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
+          image: '/bia.png
+            ',
           stats: { kd: '1.42', rating: '1.35', headshot: '26%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         }
