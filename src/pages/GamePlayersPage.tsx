@@ -102,7 +102,7 @@ const GamePlayersPage = () => {
         },
         {
           id: 5,
-          name: 'JETT',
+          name: 'CONTROLADOR',
           realName: 'Beatriz Sales',
           role: 'Duelist',
           image: '/bia.png',
