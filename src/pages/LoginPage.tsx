@@ -13,7 +13,7 @@ const LoginPage = () => {
             <form className="form">
               <div className="logo">
                 <img 
-                  src="/logo.png" 
+                  src="/logosemfundo.png" 
                   alt="Tiamat" 
                   className="logo-img"
                 />
