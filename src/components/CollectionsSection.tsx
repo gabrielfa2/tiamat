@@ -92,25 +92,25 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index }) =>
 const CollectionsSection = () => {
   const collections = [
     {
-      title: 'ESPORTS',
+      title: 'GAMES',
       image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=600',
       gradient: 'from-purple-600 to-pink-500',
       colSpan: 'md:col-span-1',
     },
     {
-      title: 'LIFESTYLE',
+      title: 'RANKING',
       image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       gradient: 'from-blue-600 to-purple-600',
       colSpan: 'md:col-span-2',
     },
     {
-      title: 'ACCESSORIES',
+      title: 'HIGHLIGHTS',
       image: 'https://images.pexels.com/photos/2787341/pexels-photo-2787341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       gradient: 'from-indigo-600 to-purple-500',
       colSpan: 'md:col-span-2',
     },
     {
-      title: 'PERFORMANCE',
+      title: 'LAST TOUR',
       image: 'https://images.pexels.com/photos/3757955/pexels-photo-3757955.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       gradient: 'from-red-500 to-orange-500',
       colSpan: 'md:col-span-1',

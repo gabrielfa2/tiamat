@@ -1,11 +1,11 @@
 import React from 'react';
 
 const VideoSection = () => {
-  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videositematheus.mp4';
+  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotiamatpronto.mp4';
   const posterUrl = '/bannertemp.png';
 
   return (
-    <section className="py-16">
+    <section className="py-1">
       {/* 👇 AQUI ESTÁ A ALTERAÇÃO 👇 */}
       {/* Trocamos 'max-w-screen-xl' por 'max-w-screen-2xl' para aumentar a largura */}
       <div className="max-w-screen-4xl mx-auto">

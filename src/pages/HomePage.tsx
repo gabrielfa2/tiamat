@@ -4,6 +4,7 @@ import ProductsSection from '../components/ProductsSection';
 import CollectionsSection from '../components/CollectionsSection';
 import DualBanners from '../components/DualBanners';
 import VideoSection from "../components/VideoSection";
+import TeamBanner from '../components/TeamBanner';
 import Footer from '../components/Footer';
 
 const HomePage = () => {
@@ -12,6 +13,7 @@ const HomePage = () => {
       <HeroSlider />
       <ProductsSection />
       <VideoSection />
+      <TeamBanner />
       <CollectionsSection />
       <Footer/>
     </>

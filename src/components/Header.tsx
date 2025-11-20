@@ -78,7 +78,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header className={`
-        bg-slate-900 
+        bg-slate-900
         shadow-lg shadow-black/30 /* <-- MUDANÇA AQUI: Substituída a borda pela sombra */
         transition-all duration-300 ease-in-out
         ${isScrolled
@@ -118,34 +118,6 @@ const Header = () => {
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
 
-              {/* V.HIVE Dropdown */}
-              <div
-                onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
-                onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
-                className="relative"
-              >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
-                  V.HIVE
-                  <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <div
-                  onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
-                  onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
-                  className={`
-                    absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                    transition-all duration-300 ease-in-out z-50
-                    ${isVhiveOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
-                    mt-2 min-w-48 overflow-hidden
-                  `}
-                >
-                  <ul className="py-2">
-                    <li><Link to="/vhive/paris" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Hive Paris</Link></li>
-                    <li><Link to="/vhive/bootcamp" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Bootcamp</Link></li>
-                    <li><Link to="/vhive/shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Shop</Link></li>
-                  </ul>
-                </div>
-              </div>
-
               {/* PARTNERS Dropdown */}
               <div
                 onMouseEnter={() => handleMenuEnter(setIsPartnersOpen, partnersTimerRef)}
@@ -169,7 +141,6 @@ const Header = () => {
                   <ul className="py-2">
                     <li><Link to="/partners/esports" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Esports Partners</Link></li>
                     <li><Link to="/partners/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Brand Partners</Link></li>
-                    <li><Link to="/partners/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Contact Us</Link></li>
                   </ul>
                 </div>
               </div>
