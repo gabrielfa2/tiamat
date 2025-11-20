@@ -1,6 +1,7 @@
 // Arquivo: src/components/CollectionsSection.tsx
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // --- PASSO 1: Hook Customizado para Animação de Scroll ---
 // Este hook observa um elemento e nos diz quando ele está visível na tela.
@@ -50,9 +51,10 @@ interface CollectionCardProps {
     colSpan: string;
   };
   index: number;
+  onGamesClick?: () => void;
 }
 
-const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index }) => {
+const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index, onGamesClick }) => {
   const [ref, isVisible] = useScrollAnimation();
 
   // Define a direção da animação com base no índice (par ou ímpar)
@@ -63,9 +65,16 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index }) =>
     ? 'opacity-100 translate-x-0' // Estado final: visível e na posição original
     : `opacity-0 ${isLeft ? '-translate-x-16' : 'translate-x-16'}`; // Estado inicial: invisível e deslocado
 
+  const handleClick = () => {
+    if (collection.title === 'GAMES' && onGamesClick) {
+      onGamesClick();
+    }
+  };
+
   return (
     <div
       ref={ref}
+      onClick={handleClick}
       className={`group cursor-pointer ${collection.colSpan} h-96 transform transition-all duration-700 ease-out ${animationClasses}`}
     >
       <div className="relative w-full h-full rounded-lg overflow-hidden">
@@ -90,6 +99,8 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection, index }) =>
 // --- PASSO 3: Componente Principal da Seção (Atualizado) ---
 // Agora a seção principal apenas monta o layout e usa o novo CollectionCard.
 const CollectionsSection = () => {
+  const navigate = useNavigate();
+
   const collections = [
     {
       title: 'GAMES',
@@ -117,16 +128,21 @@ const CollectionsSection = () => {
     }
   ];
 
+  const handleGamesClick = () => {
+    navigate('/games');
+  };
+
   return (
-    <section className="py-6 overflow-x-hidden"> {/* Adicionado overflow-x-hidden para evitar barras de rolagem */}
+    <section className="py-6 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-white mb-8">COLLECTIONS</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {collections.map((collection, index) => (
-            <CollectionCard 
+            <CollectionCard
               key={index}
               collection={collection}
               index={index}
+              onGamesClick={handleGamesClick}
             />
           ))}
         </div>
