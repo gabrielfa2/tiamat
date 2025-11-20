@@ -145,7 +145,7 @@ const CollectionsSection = () => {
       title: 'RANKING',
       image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       // 👇 COLE O LINK PÚBLICO DO SEU VÍDEO AQUI
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/video.mp4', 
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/ranking.mp4', 
       gradient: 'from-blue-600 to-purple-600',
       colSpan: 'md:col-span-2',
     },
