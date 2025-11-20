@@ -135,7 +135,7 @@ const CollectionsSection = () => {
     },
     {
       title: 'RANKING',
-      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/ranking%20pornot.mp4',
+      videoUrl: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/agrsimrankingpronoto.mp4',
       gradient: 'from-blue-600 to-purple-600',
       colSpan: 'md:col-span-2',
     },
