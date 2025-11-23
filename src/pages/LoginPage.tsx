@@ -1,77 +1,244 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const { signIn, signUp, resetPassword, error, clearError } = useAuth();
+
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    clearError();
+  };
+
+  const validateForm = () => {
+    if (!isLogin && !formData.fullName.trim()) {
+      throw new Error('Full name is required');
+    }
+    if (!formData.email.trim()) {
+      throw new Error('Email is required');
+    }
+    if (!formData.password.trim()) {
+      throw new Error('Password is required');
+    }
+    if (formData.password.length < 6) {
+      throw new Error('Password must be at least 6 characters');
+    }
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      throw new Error('Passwords do not match');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    clearError();
+    setSuccessMessage('');
+
+    try {
+      setLoading(true);
+      validateForm();
+
+      if (isLogin) {
+        await signIn(formData.email, formData.password);
+        navigate('/');
+      } else {
+        await signUp(formData.email, formData.password, formData.fullName);
+        setSuccessMessage('Account created successfully! Check your email to verify.');
+        setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+        setTimeout(() => setIsLogin(true), 2000);
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    clearError();
+    setSuccessMessage('');
+
+    try {
+      setLoading(true);
+      if (!formData.email.trim()) {
+        throw new Error('Email is required');
+      }
+      await resetPassword(formData.email);
+      setSuccessMessage('Password reset link sent to your email!');
+      setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+      setTimeout(() => setIsForgotPassword(false), 2000);
+    } catch (err) {
+      console.error('Password reset error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleToggleMode = () => {
+    clearError();
+    setSuccessMessage('');
+    setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+    setIsForgotPassword(false);
+    setIsLogin(!isLogin);
+  };
+
+  const handleBackToLogin = () => {
+    clearError();
+    setSuccessMessage('');
+    setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+    setIsForgotPassword(false);
+  };
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
       <StyledWrapper>
         <div className="container">
           <div className="login-box">
-            <form className="form">
-              <div className="logo">
-                <img 
-                  src="/logosemfundo.png" 
-                  alt="Tiamat" 
-                  className="logo-img"
+            {isForgotPassword ? (
+              <form className="form" onSubmit={handleForgotPassword}>
+                <div className="logo">
+                  <img
+                    src="/logosemfundo.png"
+                    alt="Tiamat"
+                    className="logo-img"
+                  />
+                </div>
+                <span className="header">Reset Password</span>
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="input"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  disabled={loading}
                 />
-              </div>
-              <span className="header">
-                {isLogin ? 'Welcome Back!' : 'Join Tiamat!'}
-              </span>
-              
-              {!isLogin && (
-                <input type="text" placeholder="Full Name" className="input" />
-              )}
-              <input type="email" placeholder="Email" className="input" />
-              <input type="password" placeholder="Password" className="input" />
-              {!isLogin && (
-                <input type="password" placeholder="Confirm Password" className="input" />
-              )}
-              
-              <button type="submit" className="button sign-in">
-                {isLogin ? 'Sign In' : 'Create Account'}
-              </button>
-              
-              <button type="button" className="button google-sign-in">
-                <svg className="icon" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000">
-                  <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" />
-                    <path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" />
-                    <path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" />
-                    <path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" />
-                  </g>
-                </svg>
-                <span className="span two">Sign in with Google</span>
-              </button>
-              
-              <p className="footer">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}
-                <button 
-                  type="button"
-                  onClick={() => setIsLogin(!isLogin)}
-                  className="link"
-                >
-                  {isLogin ? 'Sign up, it\'s free!' : 'Sign in here!'}
+
+                {error && <div className="error-message">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+
+                <button type="submit" className="button sign-in" disabled={loading}>
+                  {loading ? 'Sending...' : 'Send Reset Link'}
                 </button>
-                <br />
-                {isLogin && (
-                  <button type="button" className="link">Forgot password?</button>
+
+                <p className="footer">
+                  <button
+                    type="button"
+                    onClick={handleBackToLogin}
+                    className="link"
+                  >
+                    Back to Login
+                  </button>
+                </p>
+              </form>
+            ) : (
+              <form className="form" onSubmit={handleSubmit}>
+                <div className="logo">
+                  <img
+                    src="/logosemfundo.png"
+                    alt="Tiamat"
+                    className="logo-img"
+                  />
+                </div>
+                <span className="header">
+                  {isLogin ? 'Welcome Back!' : 'Join Tiamat!'}
+                </span>
+
+                {!isLogin && (
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    className="input"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    disabled={loading}
+                  />
                 )}
-              </p>
-            </form>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="input"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  disabled={loading}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="input"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  disabled={loading}
+                />
+                {!isLogin && (
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    className="input"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    disabled={loading}
+                  />
+                )}
+
+                {error && <div className="error-message">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+
+                <button type="submit" className="button sign-in" disabled={loading}>
+                  {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Create Account')}
+                </button>
+
+                <p className="footer">
+                  {isLogin ? "Don't have an account?" : "Already have an account?"}
+                  <button
+                    type="button"
+                    onClick={handleToggleMode}
+                    className="link"
+                    disabled={loading}
+                  >
+                    {isLogin ? 'Sign up, it\'s free!' : 'Sign in here!'}
+                  </button>
+                  <br />
+                  {isLogin && (
+                    <button
+                      type="button"
+                      onClick={() => setIsForgotPassword(true)}
+                      className="link"
+                      disabled={loading}
+                    >
+                      Forgot password?
+                    </button>
+                  )}
+                </p>
+              </form>
+            )}
           </div>
         </div>
       </StyledWrapper>
-      
-      {/* Back to Home */}
-      <Link 
-        to="/" 
-        className="absolute top-8 left-8 text-white hover:text-purple-400 transition-colors flex items-center gap-2"
+
+      <Link
+        to="/"
+        className="absolute top-8 left-8 text-white hover:text-blue-400 transition-colors flex items-center gap-2"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -85,10 +252,10 @@ const LoginPage = () => {
 const StyledWrapper = styled.div`
   .container {
     --form-width: 350px;
-    --aspect-ratio: 1.4;
+    --aspect-ratio: 1.5;
     --login-box-color: #1e293b;
     --input-color: #334155;
-    --button-color: #7c3aed;
+    --button-color: #3b82f6;
     --footer-color: rgba(255, 255, 255, 0.7);
     display: flex;
     justify-content: center;
@@ -103,8 +270,8 @@ const StyledWrapper = styled.div`
     box-shadow:
       0 4px 8px rgba(0, 0, 0, 0.3),
       0 8px 16px rgba(0, 0, 0, 0.2),
-      0 0 8px rgba(124, 58, 237, 0.2),
-      0 0 16px rgba(124, 58, 237, 0.1);
+      0 0 8px rgba(59, 130, 246, 0.2),
+      0 0 16px rgba(59, 130, 246, 0.1);
   }
 
   .container::before {
@@ -115,8 +282,8 @@ const StyledWrapper = styled.div`
     background: conic-gradient(
       from 45deg,
       transparent 75%,
-      #7c3aed,
-      #a855f7,
+      #3b82f6,
+      #60a5fa,
       transparent 100%
     );
     animation: spin 6s ease-in-out infinite;
@@ -139,18 +306,20 @@ const StyledWrapper = styled.div`
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     box-shadow:
-      inset 0 40px 60px -8px rgba(124, 58, 237, 0.15),
-      inset 4px 0 12px -6px rgba(168, 85, 247, 0.12),
-      inset 0 0 12px -4px rgba(124, 58, 237, 0.12);
+      inset 0 40px 60px -8px rgba(59, 130, 246, 0.15),
+      inset 4px 0 12px -6px rgba(96, 165, 250, 0.12),
+      inset 0 0 12px -4px rgba(59, 130, 246, 0.12);
+    overflow-y: auto;
+    max-height: calc(var(--form-width) * var(--aspect-ratio));
   }
 
   .form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 12px;
-    height: 100%;
+    min-height: 100%;
   }
 
   .logo {
@@ -158,19 +327,20 @@ const StyledWrapper = styled.div`
     height: 70px;
     background: linear-gradient(
       135deg,
-      rgba(124, 58, 237, 0.3),
-      rgba(168, 85, 247, 0.2)
+      rgba(59, 130, 246, 0.3),
+      rgba(96, 165, 250, 0.2)
     );
     box-shadow:
       8px 8px 16px rgba(0, 0, 0, 0.3),
-      -8px -8px 16px rgba(124, 58, 237, 0.1);
+      -8px -8px 16px rgba(59, 130, 246, 0.1);
     border-radius: 20px;
-    border: 2px solid #7c3aed;
+    border: 2px solid #3b82f6;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
   }
 
   .logo-img {
@@ -190,7 +360,7 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -213,9 +383,14 @@ const StyledWrapper = styled.div`
   }
 
   .input:focus {
-    border: 2px solid #7c3aed;
+    border: 2px solid #3b82f6;
     background: #475569;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   .button {
@@ -234,38 +409,30 @@ const StyledWrapper = styled.div`
     color: white;
     transition: all 0.3s ease;
     box-shadow:
-      0 4px 8px rgba(124, 58, 237, 0.3),
+      0 4px 8px rgba(59, 130, 246, 0.3),
       inset 0px 1px 0px rgba(255, 255, 255, 0.2);
   }
 
   .sign-in {
     margin-top: 8px;
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
   }
 
-  .google-sign-in {
-    background: #374151;
-    margin-top: 4px;
-  }
-
-  .button:hover {
+  .button:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow:
-      0 6px 12px rgba(124, 58, 237, 0.4),
+      0 6px 12px rgba(59, 130, 246, 0.4),
       inset 0px 1px 0px rgba(255, 255, 255, 0.3);
   }
 
-  .sign-in:hover {
-    background: linear-gradient(135deg, #8b5cf6, #c084fc);
+  .sign-in:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
   }
 
-  .google-sign-in:hover {
-    background: #4b5563;
-  }
-
-  .icon {
-    height: 18px;
-    width: 18px;
+  .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 
   .footer {
@@ -279,18 +446,46 @@ const StyledWrapper = styled.div`
   .footer .link {
     background: none;
     border: none;
-    color: #a855f7;
+    color: #60a5fa;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
     font-size: 13px;
     margin-left: 4px;
+    padding: 0;
   }
 
-  .footer .link:hover {
-    color: #c084fc;
+  .footer .link:hover:not(:disabled) {
+    color: #93c5fd;
     text-decoration: underline;
+  }
+
+  .footer .link:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .error-message {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    border-radius: 8px;
+    color: #fca5a5;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .success-message {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    border-radius: 8px;
+    color: #86efac;
+    font-size: 13px;
+    text-align: center;
   }
 `;
 
