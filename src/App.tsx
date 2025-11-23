@@ -21,6 +21,8 @@ import RecruitmentPage from './pages/RecruitmentPage';
 import RankingPage from './pages/RankingPage';
 import HighlightsPage from './pages/HighlightsPage';
 import LastTourPage from './pages/LastTourPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import ProfilePage from './pages/ProfilePage';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -42,6 +44,14 @@ const MainLayout = () => {
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/highlights" element={<HighlightsPage />} />
         <Route path="/last-tour" element={<LastTourPage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       {!isHomePage && <Footer />}

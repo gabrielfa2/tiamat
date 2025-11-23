@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, User, ShoppingCart, ChevronDown } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 import SearchModal from './SearchModal';
 
 const marqueeTexts = [
@@ -20,6 +21,7 @@ const Header = () => {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const location = useLocation();
   const { state, dispatch } = useCart();
+  const { user, signOut } = useAuth();
 
   // Refs para os timers
   const shopTimerRef = useRef<number | null>(null);
@@ -156,9 +158,47 @@ const Header = () => {
               <button onClick={() => setIsSearchOpen(true)}>
                 <Search className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
               </button>
-              <Link to="/login">
-                <User className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
-              </Link>
+
+              {user ? (
+                <div className="relative group">
+                  <button className="flex items-center gap-2">
+                    {user.user_metadata?.avatar_url ? (
+                      <img
+                        src={user.user_metadata.avatar_url}
+                        alt="Profile"
+                        className="h-8 w-8 rounded-full border-2 border-blue-500"
+                      />
+                    ) : (
+                      <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold border-2 border-blue-400">
+                        {user.email?.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </button>
+
+                  <div className="absolute top-full right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden z-50">
+                    <div className="px-4 py-3 border-b border-slate-700">
+                      <p className="text-sm text-white font-medium truncate">{user.user_metadata?.full_name || 'User'}</p>
+                      <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                    </div>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700 hover:text-white transition-colors"
+                    >
+                      My Profile
+                    </Link>
+                    <button
+                      onClick={() => signOut()}
+                      className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-slate-700 hover:text-red-300 transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Link to="/login">
+                  <User className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
+                </Link>
+              )}
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_CART' })}
                 className="relative"

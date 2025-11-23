@@ -39,6 +39,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinished }) => {
         muted
         playsInline
         onEnded={handleVideoEnd}
+        onError={handleVideoEnd}
       />
     </div>
   );
