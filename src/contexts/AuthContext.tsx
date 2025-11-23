@@ -24,8 +24,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Verifica sessão atual
-    (async () => {
+    // 1. Verifica a sessão atual ao carregar
+    const initSession = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         setSession(session);
@@ -35,9 +35,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } finally {
         setLoading(false);
       }
-    })();
+    };
+    initSession();
 
-    // Escuta mudanças de estado
+    // 2. Escuta mudanças em tempo real (Login, Logout, Auto-refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
@@ -51,12 +52,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const clearError = () => setError(null);
 
-  // --- FUNÇÃO DE CADASTRO (SIGN UP) CORRIGIDA ---
+  // --- FUNÇÃO DE CADASTRO (SIGN UP) ---
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
       clearError();
       
-      // Define a URL base dinamicamente
+      // Define a URL de redirecionamento dinamicamente (Localhost ou GitHub Pages)
       const redirectTo = window.location.origin + (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
       const { error } = await supabase.auth.signUp({
@@ -64,9 +65,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         password,
         options: {
           data: {
-            full_name: fullName,
+            full_name: fullName, // Salva o nome nos metadados
           },
-          emailRedirectTo: redirectTo, 
+          emailRedirectTo: redirectTo, // Garante que o link do email volte para o site certo
         },
       });
 
@@ -74,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to create account';
       setError(message);
-      throw err;
+      throw err; // Lança o erro para o LoginPage exibir
     }
   };
 
@@ -100,6 +101,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // --- FUNÇÃO DE LOGOUT ---
   const signOut = async () => {
     try {
       clearError();
@@ -112,6 +114,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // --- RECUPERAÇÃO DE SENHA ---
   const resetPassword = async (email: string) => {
     try {
       clearError();
@@ -121,7 +124,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: `${window.location.origin}/reset-password`, // Ajuste se tiver uma rota específica
       });
 
       if (error) throw error;
@@ -132,6 +135,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // --- ATUALIZAÇÃO DE SENHA ---
   const updatePassword = async (newPassword: string) => {
     try {
       clearError();
