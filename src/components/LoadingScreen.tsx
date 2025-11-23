@@ -2,35 +2,39 @@
 
 import React, { useState, useEffect } from 'react';
 
-const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotelainicial.mp4';
+const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/intro.mp4';
 
 interface LoadingScreenProps {
   onFinished: () => void;
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinished }) => {
-  // Estado para controlar o início do fade-out
   const [isFadingOut, setIsFadingOut] = useState(false);
 
-  // Função para ser chamada quando o vídeo terminar
-  const handleVideoEnd = () => {
-    // Inicia a animação de desaparecimento
+  // Função unificada para encerrar o loading
+  const finishLoading = () => {
     setIsFadingOut(true);
   };
 
   useEffect(() => {
     if (isFadingOut) {
-      // Espera a animação de 1 segundo terminar antes de remover o componente
       const timer = setTimeout(() => {
         onFinished();
-      }, 1000); // Duração da transição do CSS
-
+      }, 1000); // Tempo da animação de fade-out
       return () => clearTimeout(timer);
     }
   }, [isFadingOut, onFinished]);
 
+  // Válvula de Segurança: Se o vídeo travar, libera o site em 6 segundos no máximo
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
+      finishLoading();
+    }, 6000); // 6 segundos (ajuste conforme a duração do seu vídeo)
+
+    return () => clearTimeout(safetyTimer);
+  }, []);
+
   return (
-    // A classe 'fading-out' será adicionada para iniciar a transição
     <div className={`loading-screen ${isFadingOut ? 'fading-out' : ''}`}>
       <video
         className="loading-video"
@@ -38,8 +42,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinished }) => {
         autoPlay
         muted
         playsInline
-        onEnded={handleVideoEnd}
-        onError={handleVideoEnd}
+        onEnded={finishLoading} // Se o vídeo acabar, libera
+        onError={finishLoading} // Se o vídeo der erro, libera também!
+        style={{ pointerEvents: 'none' }} // Evita que o usuário pause clicando
       />
     </div>
   );
