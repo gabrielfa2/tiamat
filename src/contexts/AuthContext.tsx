@@ -49,28 +49,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const clearError = () => setError(null);
 
+  // Função de Cadastro (SignUp)
   const signUp = async (email: string, password: string, fullName: string) => {
-    try {
-      clearError();
+    // Define a URL base dinamicamente (se está em localhost ou github pages)
+    const redirectTo = window.location.origin + (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
-      if (!email || !password || !fullName) {
-        throw new Error('All fields are required');
-      }
-
-      if (password.length < 6) {
-        throw new Error('Password must be at least 6 characters');
-      }
-
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-          },
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
         },
-      });
-
+        // 👇 ADICIONE ISSO: Instrui o Supabase para onde voltar após o clique no e-mail
+        emailRedirectTo: redirectTo, 
+      },
+    });
+    return { error };
+  };
       if (error) throw error;
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to create account';
