@@ -24,6 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Verifica sessão atual
     (async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
@@ -36,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     })();
 
+    // Escuta mudanças de estado
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
@@ -49,24 +51,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const clearError = () => setError(null);
 
-  // Função de Cadastro (SignUp)
+  // --- FUNÇÃO DE CADASTRO (SIGN UP) CORRIGIDA ---
   const signUp = async (email: string, password: string, fullName: string) => {
-    // Define a URL base dinamicamente (se está em localhost ou github pages)
-    const redirectTo = window.location.origin + (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
+    try {
+      clearError();
+      
+      // Define a URL base dinamicamente
+      const redirectTo = window.location.origin + (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+          },
+          emailRedirectTo: redirectTo, 
         },
-        // 👇 ADICIONE ISSO: Instrui o Supabase para onde voltar após o clique no e-mail
-        emailRedirectTo: redirectTo, 
-      },
-    });
-    return { error };
-  };
+      });
+
       if (error) throw error;
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to create account';
@@ -75,6 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // --- FUNÇÃO DE LOGIN (SIGN IN) ---
   const signIn = async (email: string, password: string) => {
     try {
       clearError();
