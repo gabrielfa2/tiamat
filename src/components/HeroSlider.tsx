@@ -4,7 +4,7 @@ import PartnersCarousel from './PartnersCarousel';
 // --- CONFIGURAÇÃO ---
 
 // 1. Twitch (Automático)
-const TWITCH_CHANNEL = 'gaules'; 
+const TWITCH_CHANNEL = ''; 
 
 // 2. YouTube (Manual)
 const YOUTUBE_VIDEO_ID = ''; 
