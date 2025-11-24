@@ -21,11 +21,11 @@ const Cart = () => {
   return (
     <>
       {/* Overlay */}
-      <div 
+      <div
         className="fixed inset-0 bg-black bg-opacity-50 z-50"
         onClick={() => dispatch({ type: 'CLOSE_CART' })}
       />
-      
+
       {/* Cart Sidebar */}
       <div className="fixed right-0 top-0 h-full w-full max-w-md bg-slate-900 z-50 transform transition-transform duration-300 ease-in-out">
         <div className="flex flex-col h-full">
@@ -56,8 +56,8 @@ const Cart = () => {
                 {state.items.map((item) => (
                   <div key={`${item.id}-${item.selectedSize}-${item.selectedColor}`} className="bg-slate-800 rounded-lg p-4 border border-slate-700">
                     <div className="flex gap-4">
-                      <img 
-                        src={item.image} 
+                      <img
+                        src={item.image}
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded"
                       />
@@ -70,12 +70,12 @@ const Cart = () => {
                         {item.selectedColor && (
                           <p className="text-gray-400 text-xs">Cor: {item.selectedColor}</p>
                         )}
-                        
+
                         {/* Quantity Controls */}
                         <div className="flex items-center gap-2 mt-2">
                           <button
-                            onClick={() => dispatch({ 
-                              type: 'UPDATE_QUANTITY', 
+                            onClick={() => dispatch({
+                              type: 'UPDATE_QUANTITY',
                               payload: { id: item.id, quantity: item.quantity - 1 }
                             })}
                             className="w-8 h-8 bg-slate-700 rounded flex items-center justify-center hover:bg-slate-600 transition-colors"
@@ -84,8 +84,8 @@ const Cart = () => {
                           </button>
                           <span className="text-white font-bold w-8 text-center">{item.quantity}</span>
                           <button
-                            onClick={() => dispatch({ 
-                              type: 'UPDATE_QUANTITY', 
+                            onClick={() => dispatch({
+                              type: 'UPDATE_QUANTITY',
                               payload: { id: item.id, quantity: item.quantity + 1 }
                             })}
                             className="w-8 h-8 bg-slate-700 rounded flex items-center justify-center hover:bg-slate-600 transition-colors"
@@ -94,7 +94,7 @@ const Cart = () => {
                           </button>
                         </div>
                       </div>
-                      
+
                       <button
                         onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: item.id })}
                         className="text-red-400 hover:text-red-300 transition-colors"
@@ -115,12 +115,12 @@ const Cart = () => {
                 <span className="text-white font-bold text-lg">Total:</span>
                 <span className="text-purple-400 font-bold text-xl">€{getTotalPrice()}</span>
               </div>
-              
+
               <div className="space-y-3">
                 <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 font-bold rounded hover:from-purple-700 hover:to-blue-700 transition-colors">
                   FINALIZAR COMPRA
                 </button>
-                <button 
+                <button
                   onClick={() => dispatch({ type: 'CLEAR_CART' })}
                   className="w-full border border-slate-600 text-gray-300 py-2 font-bold rounded hover:bg-slate-800 transition-colors"
                 >

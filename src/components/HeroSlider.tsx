@@ -4,10 +4,10 @@ import PartnersCarousel from './PartnersCarousel';
 // --- CONFIGURAÇÃO ---
 
 // 1. Twitch (Automático)
-const TWITCH_CHANNEL = ''; 
+const TWITCH_CHANNEL = '';
 
 // 2. YouTube (Manual)
-const YOUTUBE_VIDEO_ID = ''; 
+const YOUTUBE_VIDEO_ID = '';
 
 // 3. Vídeo do Hover (O "Reveal")
 const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videohover.mp4';
@@ -23,12 +23,15 @@ type StreamSource = 'twitch' | 'youtube' | 'none';
 const HeroSlider = () => {
   const [activeStream, setActiveStream] = useState<StreamSource>('none');
   const [isHoverVideoVisible, setIsHoverVideoVisible] = useState(false);
-  
+
   const playerRef = useRef<HTMLDivElement>(null);
   const twitchPlayer = useRef<any>(null);
   const hoverVideoRef = useRef<HTMLVideoElement>(null);
 
-  const imageUrl = `${import.meta.env.BASE_URL}bannertemp.png`; 
+  // Ref para controlar o timer de "saída suave"
+  const fadeTimeoutRef = useRef<number | null>(null);
+
+  const imageUrl = `${import.meta.env.BASE_URL}bannertemp.png`;
 
   useEffect(() => {
     const loadTwitchScript = () => {
@@ -42,9 +45,9 @@ const HeroSlider = () => {
     loadTwitchScript();
 
     if (YOUTUBE_VIDEO_ID) {
-        if (!twitchPlayer.current) {
-            setActiveStream('youtube');
-        }
+      if (!twitchPlayer.current) {
+        setActiveStream('youtube');
+      }
     }
 
     const initPlayer = setInterval(() => {
@@ -60,7 +63,7 @@ const HeroSlider = () => {
           parent: parentDomains,
           autoplay: true,
           muted: true,
-          controls: false, 
+          controls: false,
         });
 
         twitchPlayer.current = player;
@@ -68,7 +71,7 @@ const HeroSlider = () => {
         player.addEventListener(window.Twitch.Player.ONLINE, () => {
           console.log('Twitch Online');
           setActiveStream('twitch');
-          player.setMuted(true); 
+          player.setMuted(true);
         });
 
         player.addEventListener(window.Twitch.Player.OFFLINE, () => {
@@ -85,8 +88,16 @@ const HeroSlider = () => {
     return () => clearInterval(initPlayer);
   }, []);
 
-  // --- HANDLERS DA ÁREA MÁGICA ---
+  // --- HANDLERS DA ÁREA MÁGICA (COM TRANSIÇÃO SUAVE) ---
+
   const handleMagicEnter = () => {
+    // 1. Se o usuário voltou o mouse rápido, cancela o "pause" que estava agendado
+    if (fadeTimeoutRef.current) {
+      clearTimeout(fadeTimeoutRef.current);
+      fadeTimeoutRef.current = null;
+    }
+
+    // 2. Mostra e toca o vídeo
     if (hoverVideoRef.current) {
       setIsHoverVideoVisible(true);
       hoverVideoRef.current.play().catch(e => console.error("Erro play hover:", e));
@@ -94,42 +105,38 @@ const HeroSlider = () => {
   };
 
   const handleMagicLeave = () => {
-    if (hoverVideoRef.current) {
-      setIsHoverVideoVisible(false);
-      hoverVideoRef.current.pause();
-      hoverVideoRef.current.currentTime = 0; // Reseta para o início
-    }
+    // 1. Começa o fade-out visual imediatamente
+    setIsHoverVideoVisible(false);
+
+    // 2. Agenda o pause/reset para DEPOIS que a animação CSS terminar (500ms)
+    // Isso evita o corte "seco"
+    fadeTimeoutRef.current = window.setTimeout(() => {
+      if (hoverVideoRef.current) {
+        hoverVideoRef.current.pause();
+        hoverVideoRef.current.currentTime = 0;
+      }
+    }, 500); // Deve ser igual ao 'duration-500' do className
   };
 
   return (
-    <div className="relative w-full aspect-[21/9] bg-slate-900 overflow-hidden group">
-      
-      {/* =============================================
-          CAMADA 0: ÁREA MÁGICA (TRIGGER) - Z-INDEX 20
-          =============================================
-          Baixamos de z-50 para z-20. Assim, o Header (z-50) 
-          e o Carrossel (z-30) ficam por cima.
-      */}
+    <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-slate-900 overflow-hidden group">
+
+      {/* CAMADA 0: ÁREA MÁGICA (Z-20) - Ajustado para não bloquear o Menu */}
       {activeStream === 'none' && (
-        <div 
+        <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                      w-[35%] h-[60%] z-20 cursor-pointer"
           onMouseEnter={handleMagicEnter}
           onMouseLeave={handleMagicLeave}
-          style={{ backgroundColor: 'transparent' }} 
+          style={{ backgroundColor: 'transparent' }}
         />
       )}
 
-      {/* =============================================
-          CAMADA 1: VÍDEO DE HOVER (REVEAL) - Z-INDEX 10
-          =============================================
-          Baixamos de z-40 para z-10. Fica logo acima do fundo.
-      */}
+      {/* CAMADA 1: VÍDEO DE HOVER (Z-10) */}
       {activeStream === 'none' && (
-        <div 
-          className={`absolute inset-0 z-10 transition-opacity duration-500 pointer-events-none ${
-            isHoverVideoVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+        <div
+          className={`absolute inset-0 z-10 transition-opacity duration-500 pointer-events-none ${isHoverVideoVisible ? 'opacity-100' : 'opacity-0'
+            }`}
         >
           <video
             ref={hoverVideoRef}
@@ -137,30 +144,21 @@ const HeroSlider = () => {
             className="w-full h-full object-cover"
             muted
             playsInline
-            // SEM LOOP: Para ele congelar no último frame
+          // SEM LOOP: Para ele congelar no último frame se o mouse ficar muito tempo
           />
           <div className="absolute inset-0 bg-black/10"></div>
         </div>
       )}
 
-      {/* =============================================
-          CAMADA 2: PLAYER DA TWITCH - Z-INDEX 0
-          =============================================
-          Nível do fundo.
-      */}
-      <div 
-        ref={playerRef} 
+      {/* CAMADA 2: PLAYER DA TWITCH (Z-0) */}
+      <div
+        ref={playerRef}
         id="twitch-embed"
-        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
-          activeStream === 'twitch' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${activeStream === 'twitch' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
       />
 
-      {/* =============================================
-          CAMADA 3: PLAYER DO YOUTUBE - Z-INDEX 0
-          =============================================
-          Nível do fundo.
-      */}
+      {/* CAMADA 3: PLAYER DO YOUTUBE (Z-0) */}
       {activeStream === 'youtube' && YOUTUBE_VIDEO_ID && (
         <div className="absolute inset-0 z-0 w-full h-full">
           <iframe
@@ -175,25 +173,20 @@ const HeroSlider = () => {
         </div>
       )}
 
-      {/* =============================================
-          CAMADA 4: BANNER PADRÃO (IMAGEM) - Z-INDEX 0
-          =============================================
-          Nível do fundo.
-      */}
-      <div 
-        className={`absolute inset-0 w-full h-full transition-opacity duration-1000 z-0 ${
-          activeStream === 'none' ? 'opacity-100' : 'opacity-0'
-        }`}
+      {/* CAMADA 4: BANNER PADRÃO (Z-0) */}
+      <div
+        className={`absolute inset-0 w-full h-full transition-opacity duration-1000 z-0 ${activeStream === 'none' ? 'opacity-100' : 'opacity-0'
+          }`}
       >
         <div
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          {/* Overlay e Conteúdo */}
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         </div>
       </div>
 
-      {/* INDICADOR DE LIVE - Z-30 (Acima da área mágica) */}
+      {/* ELEMENTOS DE INTERFACE (Z-30) */}
       {activeStream !== 'none' && (
         <div className="absolute top-4 right-4 z-30 flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm animate-pulse shadow-lg">
           <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -201,20 +194,19 @@ const HeroSlider = () => {
         </div>
       )}
 
-      {/* CONTROLE DE SOM - Z-30 */}
       {activeStream === 'twitch' && (
-        <button 
-            onClick={() => {
-                if(twitchPlayer.current) {
-                    const muted = twitchPlayer.current.getMuted();
-                    twitchPlayer.current.setMuted(!muted);
-                }
-            }}
-            className="absolute bottom-24 right-4 z-30 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
+        <button
+          onClick={() => {
+            if (twitchPlayer.current) {
+              const muted = twitchPlayer.current.getMuted();
+              twitchPlayer.current.setMuted(!muted);
+            }
+          }}
+          className="absolute bottom-24 right-4 z-30 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
         </button>
       )}
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, User, ShoppingCart, ChevronDown } from 'lucide-react';
+import { Search, User, ShoppingCart, ChevronDown, Menu, X } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import SearchModal from './SearchModal';
@@ -19,6 +19,7 @@ const Header = () => {
   const [isVhiveOpen, setIsVhiveOpen] = useState(false);
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { state, dispatch } = useCart();
   const { user, signOut } = useAuth();
@@ -101,6 +102,14 @@ const Header = () => {
               />
             </Link>
 
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-white p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8 relative">
               <button
@@ -120,54 +129,6 @@ const Header = () => {
                 TEAMS
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
-
-              {/* V.HIVE Dropdown */}
-              <div
-                onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
-                onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
-                className="relative"
-              >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
-                  V.HIVE
-                  <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <div className={`
-                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                  transition-all duration-300 ease-in-out z-50
-                  ${isVhiveOpen ? 'opacity-100 pointer-events-auto max-h-96' : 'opacity-0 pointer-events-none max-h-0'}
-                  mt-2 min-w-48 overflow-hidden
-                `}>
-                  <ul className="py-2">
-                    <li><Link to="/vhive/paris" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Hive Paris</Link></li>
-                    <li><Link to="/vhive/bootcamp" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Bootcamp</Link></li>
-                    <li><Link to="/vhive/shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Shop</Link></li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* PARTNERS Dropdown */}
-              <div
-                onMouseEnter={() => handleMenuEnter(setIsPartnersOpen, partnersTimerRef)}
-                onMouseLeave={() => handleMenuLeave(setIsPartnersOpen, partnersTimerRef)}
-                className="relative"
-              >
-                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
-                  PARTNERS
-                  <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <div className={`
-                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                  transition-all duration-300 ease-in-out z-50
-                  ${isPartnersOpen ? 'opacity-100 pointer-events-auto max-h-96' : 'opacity-0 pointer-events-none max-h-0'}
-                  mt-2 min-w-48 overflow-hidden
-                `}>
-                  <ul className="py-2">
-                    <li><Link to="/partners/esports" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Esports Partners</Link></li>
-                    <li><Link to="/partners/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Brand Partners</Link></li>
-                    <li><Link to="/partners/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Contact Us</Link></li>
-                  </ul>
-                </div>
-              </div>
 
               {/* ABOUT Dropdown */}
               <div
@@ -196,10 +157,6 @@ const Header = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
-              <button className="hidden md:flex items-center gap-1 text-sm font-semibold text-white hover:text-gray-300 transition-colors">
-                ENGLISH
-                <ChevronDown className="h-4 w-4" />
-              </button>
               <button onClick={() => setIsSearchOpen(true)}>
                 <Search className="h-5 w-5 text-white hover:text-gray-300 cursor-pointer transition-colors" />
               </button>
@@ -287,23 +244,6 @@ const Header = () => {
                   <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Outlet</Link></li>
                   <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Digital Items</Link></li>
                   <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">All Products</Link></li>
-                </ul>
-              </div>
-              {/* Latest Trends Column */}
-              <div className="col-span-2">
-                <h3 className="font-bold text-gray-900 mb-4 text-sm tracking-wider">
-                  LATEST TRENDS
-                </h3>
-                <ul className="space-y-3">
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">KARE</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Alternate 2025</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Pro Jersey 2025</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Vitality x Golden Hornets</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">V.University</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Essentials 2025</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Travel Kit 2025</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Fan Pack 2025</Link></li>
-                  <li><Link to="/products" className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">Gift Card</Link></li>
                 </ul>
               </div>
               {/* Featured Image 1 */}
@@ -399,6 +339,29 @@ const Header = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Menu Drawer */}
+        <div className={`
+          fixed inset-0 z-40 bg-slate-900 pt-24 px-6 transform transition-transform duration-300 ease-in-out md:hidden
+          ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}>
+          <nav className="flex flex-col space-y-6">
+            <Link to="/products" className="text-2xl font-bold text-white hover:text-purple-400 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              SHOP
+            </Link>
+            <Link to="/games" className="text-2xl font-bold text-white hover:text-purple-400 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              TEAMS
+            </Link>
+            <div className="space-y-4">
+              <p className="text-2xl font-bold text-white">ABOUT</p>
+              <div className="pl-4 flex flex-col space-y-3 border-l-2 border-slate-700">
+                <Link to="/about" className="text-lg text-gray-300 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+                <Link to="/socials" className="text-lg text-gray-300 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Socials</Link>
+                <Link to="/about/contact" className="text-lg text-gray-300 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+              </div>
+            </div>
+          </nav>
         </div>
 
       </header>

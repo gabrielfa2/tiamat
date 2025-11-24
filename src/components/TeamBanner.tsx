@@ -3,24 +3,26 @@ import React from 'react';
 const TeamBanner = () => {
   return (
     <section className="relative w-full overflow-hidden bg-slate-900">
-      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[400px]">
+      <div className="flex flex-col md:block relative w-full md:h-[500px] lg:h-[400px]">
         {/* Background Image */}
-        <div className="absolute inset-0">
+        <div className="relative h-64 md:absolute md:inset-0 w-full">
           <img
             src={`${import.meta.env.BASE_URL}imagemtime.png`}
             alt="Tiamat Team"
             className="w-full h-full object-cover object-center"
           />
+          {/* Mobile Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent md:hidden"></div>
         </div>
 
-        {/* Gradient Overlay para melhor legibilidade do texto */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent"></div>
+        {/* Desktop Gradient Overlay */}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent pointer-events-none"></div>
 
         {/* Content Container */}
-        <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
+        <div className="relative md:h-full max-w-7xl mx-auto px-4 py-8 md:py-0 flex items-center bg-slate-900 md:bg-transparent">
           <div className="max-w-xl">
             {/* Main Title */}
-            <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight">
+            <h2 className="text-4xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight">
               OUR
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
@@ -52,7 +54,7 @@ const TeamBanner = () => {
         </div>
 
         {/* Decorative Element - Optional */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent"></div>
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none"></div>
       </div>
     </section>
   );
