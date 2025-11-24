@@ -10,7 +10,7 @@ const TWITCH_CHANNEL = 'gaules';
 const YOUTUBE_VIDEO_ID = ''; 
 
 // 3. Vídeo do Hover (O "Reveal")
-const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotelainicial.mp4';
+const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videohover.mp4';
 
 declare global {
   interface Window {
