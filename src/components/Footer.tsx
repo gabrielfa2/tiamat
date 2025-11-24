@@ -40,16 +40,13 @@ const Footer = () => {
               </span>
             </h2>
             <p className="text-gray-300 text-lg mb-2">
-              Unlock the future of productivity with Tiamat.
-            </p>
-            <p className="text-gray-400 mb-8">
-              Remember, this journey is just getting started.
+              Become a Tiamate.
             </p>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-colors">
-                SEE IN ACTION
+                JOIN US
               </button>
               <VisitorCounter />
             </div>
