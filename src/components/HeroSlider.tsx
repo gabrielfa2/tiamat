@@ -10,7 +10,7 @@ const TWITCH_CHANNEL = '';
 // Quando for abrir live no YouTube, cole o ID do vídeo aqui.
 // O ID é a parte final da URL: youtube.com/watch?v=XXXXXXXX
 // Se não tiver live no YouTube, deixe como uma string vazia: ''
-const YOUTUBE_VIDEO_ID = 'xMoJSkps8Vc'; // Exemplo: 'jfKfPfyJRdk'
+const YOUTUBE_VIDEO_ID = ''; // Exemplo: 'jfKfPfyJRdk'
 
 declare global {
   interface Window {
