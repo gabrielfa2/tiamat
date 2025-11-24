@@ -4,14 +4,13 @@ import PartnersCarousel from './PartnersCarousel';
 // --- CONFIGURAÇÃO ---
 
 // 1. Twitch (Automático)
-const TWITCH_CHANNEL = ''; 
+const TWITCH_CHANNEL = 'gaules'; 
 
 // 2. YouTube (Manual)
 const YOUTUBE_VIDEO_ID = ''; 
 
 // 3. Vídeo do Hover (O "Reveal")
-// Substitua por um vídeo curto (3-5s) de alta qualidade
-const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videohover.mp4';
+const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotelainicial.mp4';
 
 declare global {
   interface Window {
@@ -106,32 +105,29 @@ const HeroSlider = () => {
     <div className="relative w-full aspect-[21/9] bg-slate-900 overflow-hidden group">
       
       {/* =============================================
-          CAMADA 0: ÁREA MÁGICA (TRIGGER) - Z-INDEX 50
+          CAMADA 0: ÁREA MÁGICA (TRIGGER) - Z-INDEX 20
           =============================================
-          Só existe se NÃO tiver live ativa.
-          É invisível e detecta o mouse.
+          Baixamos de z-50 para z-20. Assim, o Header (z-50) 
+          e o Carrossel (z-30) ficam por cima.
       */}
       {activeStream === 'none' && (
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                     w-[35%] h-[60%] z-50 cursor-pointer"
+                     w-[35%] h-[60%] z-20 cursor-pointer"
           onMouseEnter={handleMagicEnter}
           onMouseLeave={handleMagicLeave}
-          // Use bg-red-500/20 aqui temporariamente se quiser visualizar onde está a área
           style={{ backgroundColor: 'transparent' }} 
         />
       )}
 
       {/* =============================================
-          CAMADA 1: VÍDEO DE HOVER (REVEAL) - Z-INDEX 40
+          CAMADA 1: VÍDEO DE HOVER (REVEAL) - Z-INDEX 10
           =============================================
-          Aparece quando a área mágica é ativada.
-          Fica SOBRE a imagem estática, mas ABAIXO da área mágica (para não bloquear o mouseleave).
-          Pointer events none para o mouse passar "através" dele e continuar na área mágica.
+          Baixamos de z-40 para z-10. Fica logo acima do fundo.
       */}
       {activeStream === 'none' && (
         <div 
-          className={`absolute inset-0 z-40 transition-opacity duration-500 pointer-events-none ${
+          className={`absolute inset-0 z-10 transition-opacity duration-500 pointer-events-none ${
             isHoverVideoVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -143,29 +139,30 @@ const HeroSlider = () => {
             playsInline
             // SEM LOOP: Para ele congelar no último frame
           />
-          {/* Overlay leve opcional no vídeo */}
           <div className="absolute inset-0 bg-black/10"></div>
         </div>
       )}
 
       {/* =============================================
-          CAMADA 2: PLAYER DA TWITCH - Z-INDEX 30
+          CAMADA 2: PLAYER DA TWITCH - Z-INDEX 0
           =============================================
+          Nível do fundo.
       */}
       <div 
         ref={playerRef} 
         id="twitch-embed"
-        className={`absolute inset-0 z-30 transition-opacity duration-1000 ${
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
           activeStream === 'twitch' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       />
 
       {/* =============================================
-          CAMADA 3: PLAYER DO YOUTUBE - Z-INDEX 20
+          CAMADA 3: PLAYER DO YOUTUBE - Z-INDEX 0
           =============================================
+          Nível do fundo.
       */}
       {activeStream === 'youtube' && YOUTUBE_VIDEO_ID && (
-        <div className="absolute inset-0 z-20 w-full h-full">
+        <div className="absolute inset-0 z-0 w-full h-full">
           <iframe
             className="w-full h-full object-cover pointer-events-none"
             src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&enablejsapi=1`}
@@ -179,11 +176,12 @@ const HeroSlider = () => {
       )}
 
       {/* =============================================
-          CAMADA 4: BANNER PADRÃO (IMAGEM) - Z-INDEX 10
+          CAMADA 4: BANNER PADRÃO (IMAGEM) - Z-INDEX 0
           =============================================
+          Nível do fundo.
       */}
       <div 
-        className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+        className={`absolute inset-0 w-full h-full transition-opacity duration-1000 z-0 ${
           activeStream === 'none' ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -191,18 +189,19 @@ const HeroSlider = () => {
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
+          {/* Overlay e Conteúdo */}
         </div>
       </div>
 
-      {/* INDICADOR DE LIVE (SE HOUVER) */}
+      {/* INDICADOR DE LIVE - Z-30 (Acima da área mágica) */}
       {activeStream !== 'none' && (
-        <div className="absolute top-4 right-4 z-50 flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm animate-pulse shadow-lg">
+        <div className="absolute top-4 right-4 z-30 flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm animate-pulse shadow-lg">
           <div className="w-2 h-2 bg-white rounded-full"></div>
           {activeStream === 'twitch' ? 'TWITCH LIVE' : 'YOUTUBE LIVE'}
         </div>
       )}
 
-      {/* CONTROLE DE SOM (TWITCH) */}
+      {/* CONTROLE DE SOM - Z-30 */}
       {activeStream === 'twitch' && (
         <button 
             onClick={() => {
@@ -211,7 +210,7 @@ const HeroSlider = () => {
                     twitchPlayer.current.setMuted(!muted);
                 }
             }}
-            className="absolute bottom-24 right-4 z-50 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
+            className="absolute bottom-24 right-4 z-30 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
         >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
