@@ -66,7 +66,7 @@ const Header = () => {
       {/* Announcement Bar */}
       <div className={`
         bg-black text-white py-3 overflow-hidden text-xs font-bold tracking-wider
-        transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-50
+        transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-101
         ${isScrolled ? 'max-h-0 py-0 opacity-0' : 'max-h-12 opacity-100'}
       `}>
         <div className="flex w-max animate-scroll">
@@ -84,7 +84,7 @@ const Header = () => {
         shadow-lg shadow-black/30 /* <-- MUDANÇA AQUI: Substituída a borda pela sombra */
         transition-all duration-300 ease-in-out
         ${isScrolled
-          ? 'fixed top-0 left-0 right-0 z-40'
+          ? 'fixed top-0 left-0 right-0 z-100'
           : 'fixed left-0 right-0 z-40'
         }
         ${isScrolled ? 'top-0' : 'top-10'}
