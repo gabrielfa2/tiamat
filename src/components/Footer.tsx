@@ -1,5 +1,6 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Youtube, Slack, Globe } from 'lucide-react';
+import VisitorCounter from './VisitorCounter';
 
 const Footer = () => {
   return (
@@ -54,6 +55,7 @@ const Footer = () => {
                 <Slack className="h-5 w-5" />
                 JOIN OUR SLACK
               </button>
+              <VisitorCounter />
             </div>
           </div>
 
