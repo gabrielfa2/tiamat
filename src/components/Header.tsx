@@ -26,9 +26,9 @@ const Header = () => {
   // Refs para os timers
   const shopTimerRef = useRef<number | null>(null);
   const teamsTimerRef = useRef<number | null>(null);
+  const aboutTimerRef = useRef<number | null>(null);
   const vhiveTimerRef = useRef<number | null>(null);
   const partnersTimerRef = useRef<number | null>(null);
-  const aboutTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +66,8 @@ const Header = () => {
       {/* Announcement Bar */}
       <div className={`
         bg-black text-white py-3 overflow-hidden text-xs font-bold tracking-wider
-        transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-52
+        transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 
+        z-[60] /* Camada mais alta de todas */
         ${isScrolled ? 'max-h-0 py-0 opacity-0' : 'max-h-12 opacity-100'}
       `}>
         <div className="flex w-max animate-scroll">
@@ -81,13 +82,13 @@ const Header = () => {
       {/* Main Navigation */}
       <header className={`
         bg-slate-900
-        shadow-lg shadow-black/30 /* <-- MUDANÇA AQUI: Substituída a borda pela sombra */
+        shadow-lg shadow-black/30
         transition-all duration-300 ease-in-out
+        z-[50] /* Camada alta para sobrepor o Hero */
         ${isScrolled
-          ? 'fixed top-0 left-0 right-0 z-51'
-          : 'fixed left-0 right-0 z-51'
+          ? 'fixed top-0 left-0 right-0'
+          : 'fixed left-0 right-0 top-12' /* Ajuste de top-12 (48px) para não cobrir botões */
         }
-        ${isScrolled ? 'top-0' : 'top-10'}
       `}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-20">
@@ -102,15 +103,14 @@ const Header = () => {
 
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8 relative">
-              <Link
-                to="/products"
+              <button
                 onMouseEnter={() => handleMenuEnter(setIsShopOpen, shopTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsShopOpen, shopTimerRef)}
                 className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
               >
                 SHOP
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
-              </Link>
+              </button>
 
               <button
                 onMouseEnter={() => handleMenuEnter(setIsTeamsOpen, teamsTimerRef)}
@@ -120,6 +120,54 @@ const Header = () => {
                 TEAMS
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
               </button>
+
+              {/* V.HIVE Dropdown */}
+              <div
+                onMouseEnter={() => handleMenuEnter(setIsVhiveOpen, vhiveTimerRef)}
+                onMouseLeave={() => handleMenuLeave(setIsVhiveOpen, vhiveTimerRef)}
+                className="relative"
+              >
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
+                  V.HIVE
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isVhiveOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isVhiveOpen ? 'opacity-100 pointer-events-auto max-h-96' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
+                  <ul className="py-2">
+                    <li><Link to="/vhive/paris" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Hive Paris</Link></li>
+                    <li><Link to="/vhive/bootcamp" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Bootcamp</Link></li>
+                    <li><Link to="/vhive/shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">V.Shop</Link></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* PARTNERS Dropdown */}
+              <div
+                onMouseEnter={() => handleMenuEnter(setIsPartnersOpen, partnersTimerRef)}
+                onMouseLeave={() => handleMenuLeave(setIsPartnersOpen, partnersTimerRef)}
+                className="relative"
+              >
+                <button className="font-semibold text-white hover:text-gray-300 transition-colors flex items-center gap-1">
+                  PARTNERS
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isPartnersOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isPartnersOpen ? 'opacity-100 pointer-events-auto max-h-96' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
+                  <ul className="py-2">
+                    <li><Link to="/partners/esports" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Esports Partners</Link></li>
+                    <li><Link to="/partners/brands" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Brand Partners</Link></li>
+                    <li><Link to="/partners/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Contact Us</Link></li>
+                  </ul>
+                </div>
+              </div>
 
               {/* ABOUT Dropdown */}
               <div
@@ -131,16 +179,12 @@ const Header = () => {
                   ABOUT
                   <ChevronDown className={`h-4 w-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div
-                  onMouseEnter={() => handleMenuEnter(setIsAboutOpen, aboutTimerRef)}
-                  onMouseLeave={() => handleMenuLeave(setIsAboutOpen, aboutTimerRef)}
-                  className={`
-                    absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
-                    transition-all duration-300 ease-in-out z-50
-                    ${isAboutOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none max-h-0'}
-                    mt-2 min-w-48 overflow-hidden
-                  `}
-                >
+                <div className={`
+                  absolute top-full left-0 bg-white border border-gray-200 rounded shadow-lg
+                  transition-all duration-300 ease-in-out z-50
+                  ${isAboutOpen ? 'opacity-100 pointer-events-auto max-h-96' : 'opacity-0 pointer-events-none max-h-0'}
+                  mt-2 min-w-48 overflow-hidden
+                `}>
                   <ul className="py-2">
                     <li><Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">About Us</Link></li>
                     <li><Link to="/socials" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Socials</Link></li>
@@ -221,7 +265,7 @@ const Header = () => {
           onMouseLeave={() => handleMenuLeave(setIsShopOpen, shopTimerRef)}
           className={`
             absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg
-            transition-all duration-300 ease-in-out
+            transition-all duration-300 ease-in-out z-50
             ${isShopOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
             overflow-hidden
           `}
@@ -299,7 +343,7 @@ const Header = () => {
           onMouseLeave={() => handleMenuLeave(setIsTeamsOpen, teamsTimerRef)}
           className={`
             absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg
-            transition-all duration-300 ease-in-out
+            transition-all duration-300 ease-in-out z-50
             ${isTeamsOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}
             overflow-hidden
           `}
