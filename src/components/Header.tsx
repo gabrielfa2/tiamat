@@ -102,14 +102,15 @@ const Header = () => {
 
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8 relative">
-              <button
+              <Link
+                to="/products"
                 onMouseEnter={() => handleMenuEnter(setIsShopOpen, shopTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsShopOpen, shopTimerRef)}
                 className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
               >
                 SHOP
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
-              </button>
+              </Link>
 
               <button
                 onMouseEnter={() => handleMenuEnter(setIsTeamsOpen, teamsTimerRef)}
@@ -142,7 +143,7 @@ const Header = () => {
                 >
                   <ul className="py-2">
                     <li><Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">About Us</Link></li>
-                    <li><Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Our Story</Link></li>
+                    <li><Link to="/socials" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Socials</Link></li>
                     <li><Link to="/about/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium">Contact</Link></li>
                   </ul>
                 </div>

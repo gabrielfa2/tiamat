@@ -23,6 +23,7 @@ import HighlightsPage from './pages/HighlightsPage';
 import LastTourPage from './pages/LastTourPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
+import PlayersSocialsPage from './pages/PlayersSocialsPage';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const MainLayout = () => {
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/highlights" element={<HighlightsPage />} />
         <Route path="/last-tour" element={<LastTourPage />} />
+        <Route path="/socials" element={<PlayersSocialsPage />} />
         <Route
           path="/profile"
           element={
