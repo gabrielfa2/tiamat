@@ -26,7 +26,7 @@ const HeroSlider = () => {
   const twitchPlayer = useRef<any>(null);
 
   // Imagem de Background (Fallback)
-  const imageUrl = '/bannertemp.png'; 
+  const imageUrl = `${import.meta.env.BASE_URL}bannertemp.png`; 
 
   useEffect(() => {
     // Carrega o script da Twitch
