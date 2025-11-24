@@ -85,7 +85,7 @@ const Header = () => {
         transition-all duration-300 ease-in-out
         ${isScrolled
           ? 'fixed top-0 left-0 right-0 z-100'
-          : 'fixed left-0 right-0 z-40'
+          : 'fixed left-0 right-0 z-100'
         }
         ${isScrolled ? 'top-0' : 'top-10'}
       `}>
