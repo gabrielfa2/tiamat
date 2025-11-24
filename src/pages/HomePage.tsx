@@ -11,11 +11,13 @@ const HomePage = () => {
   return (
     <>
       <HeroSlider />
-      <VideoSection />
-      <TeamBanner />
+      <div className="hidden md:block">
+        <VideoSection />
+        <TeamBanner />
+      </div>
       <ProductsSection />
       <CollectionsSection />
-      <Footer/>
+      <Footer />
     </>
   );
 };
