@@ -4,7 +4,7 @@ import PartnersCarousel from './PartnersCarousel';
 // --- CONFIGURAÇÃO ---
 
 // 1. Twitch (Automático): Coloque o nome do canal.
-const TWITCH_CHANNEL = 'gaules'; 
+const TWITCH_CHANNEL = ''; 
 
 // 2. YouTube (Manual):
 // Quando for abrir live no YouTube, cole o ID do vídeo aqui.
