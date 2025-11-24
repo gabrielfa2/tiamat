@@ -112,23 +112,29 @@ const Header = () => {
 
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-8 relative">
-              <button
+              {/* --- SHOP agora é um Link --- */}
+              <Link
+                to="/products"
                 onMouseEnter={() => handleMenuEnter(setIsShopOpen, shopTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsShopOpen, shopTimerRef)}
-                className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
+                className="font-semibold text-white hover:text-gray-300 transition-colors relative group py-2" // Adicionei py-2 para aumentar a área de click/hover
               >
                 SHOP
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isShopOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
-              </button>
+              </Link>
 
-              <button
+              {/* --- TEAMS agora é um Link --- */}
+              <Link
+                to="/games"
                 onMouseEnter={() => handleMenuEnter(setIsTeamsOpen, teamsTimerRef)}
                 onMouseLeave={() => handleMenuLeave(setIsTeamsOpen, teamsTimerRef)}
-                className="font-semibold text-white hover:text-gray-300 transition-colors relative group"
+                className="font-semibold text-white hover:text-gray-300 transition-colors relative group py-2"
               >
                 TEAMS
                 <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform ${isTeamsOpen ? 'scale-x-100' : 'scale-x-0'}`}></span>
-              </button>
+              </Link>
+
+              {/* ... Restante dos itens (V.HIVE, PARTNERS, ABOUT) continua igual ... */}
 
               {/* ABOUT Dropdown */}
               <div
