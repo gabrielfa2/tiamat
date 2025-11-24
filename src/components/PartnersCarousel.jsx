@@ -1,5 +1,3 @@
-// src/components/PartnersCarousel.jsx
-
 import React from 'react';
 
 const partners = [
@@ -15,7 +13,10 @@ const extendedPartners = Array(5).fill([...partners]).flat();
 
 const PartnersCarousel = () => {
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-slate-800 py-4 border-t border-slate-700 overflow-hidden">
+    // 1. Adicionei "group/partners" e "z-30"
+    // "group/partners": Isola o hover deste componente do resto do Hero.
+    // "z-30": Garante que o carrossel fique acima do player da Twitch/YouTube.
+    <div className="absolute bottom-0 left-0 right-0 bg-slate-800 py-4 border-t border-slate-700 overflow-hidden z-30 group/partners">
       <div
         className="relative w-full overflow-hidden"
         style={{
@@ -23,18 +24,18 @@ const PartnersCarousel = () => {
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
         }}
       >
-        <div className="flex w-max animate-scroll hover:[animation-play-state:paused]">
+        {/* 2. Usei "group-hover/partners:..." para pausar a animação */}
+        <div className="flex w-max animate-scroll group-hover/partners:[animation-play-state:paused]">
           {extendedPartners.map((partner, index) => (
             <div key={`${partner.logoSrc}-${index}`} className="flex-shrink-0 mx-8 flex items-center justify-center">
               <img
                 src={partner.logoSrc}
                 alt={`Logo do jogo ${partner.name}`}
-                // 👇 MUDANÇAS AQUI 👇
-                // Aplicamos um filtro que tenta deixar a imagem branca.
-                // Ao passar o mouse, o filtro é removido e o brilho é aplicado.
+                // 3. Usei "group-hover/partners:..." para o efeito de cor/brilho
+                // Isso impede que os logos acendam quando você passa o mouse no meio do vídeo.
                 className="h-14 w-auto object-contain
                            filter brightness-0 invert
-                           group-hover:filter-none group-hover:drop-shadow-glow-purple
+                           group-hover/partners:filter-none group-hover/partners:drop-shadow-glow-purple
                            transition-all duration-300"
               />
             </div>
