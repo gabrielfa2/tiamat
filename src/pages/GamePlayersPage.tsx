@@ -66,7 +66,7 @@ const GamePlayersPage = () => {
       players: [
         {
           id: 1,
-          name: 'DUELISTA',
+          name: 'yellow flash',
           realName: 'Gabriel Araújo',
           role: 'Duelist',
           image: `${import.meta.env.BASE_URL}gabriel.png`,
@@ -75,7 +75,7 @@ const GamePlayersPage = () => {
         },
         {
           id: 2,
-          name: 'INICIADOR',
+          name: 'myr4gem',
           realName: 'Myrlla Gurgel',
           role: 'Sentinel',
           image: `${import.meta.env.BASE_URL}myrlla.png`,
@@ -84,7 +84,7 @@ const GamePlayersPage = () => {
         },
         {
           id: 3,
-          name: 'SENTINELA',
+          name: 'Magoraga',
           realName: 'Eduardo Masquerano ',
           role: 'Initiator',
           image: `${import.meta.env.BASE_URL}masqw.png`,
@@ -93,7 +93,7 @@ const GamePlayersPage = () => {
         },
         {
           id: 4,
-          name: 'CONTROLADOR',
+          name: 'fcosta',
           realName: 'Fernanda Costa',
           role: 'Controller',
           image: `${import.meta.env.BASE_URL}fer.PNG`,
@@ -102,7 +102,7 @@ const GamePlayersPage = () => {
         },
         {
           id: 5,
-          name: 'CONTROLADOR',
+          name: 'beasois',
           realName: 'Beatriz Sales',
           role: 'Duelist',
           image: `${import.meta.env.BASE_URL}bia.png`,
