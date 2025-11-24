@@ -51,10 +51,6 @@ const Footer = () => {
               <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-colors">
                 SEE IN ACTION
               </button>
-              <button className="flex items-center justify-center gap-2 bg-slate-800 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-700 transition-colors border border-slate-700">
-                <Slack className="h-5 w-5" />
-                JOIN OUR SLACK
-              </button>
               <VisitorCounter />
             </div>
           </div>
@@ -74,35 +70,23 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex justify-center lg:justify-end gap-4 mb-8">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="h-6 w-6" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <Youtube className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Slack className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Globe className="h-6 w-6" />
-              </a>
             </div>
 
             {/* Copyright and Made with */}
             <div className="text-gray-500 text-sm">
-              <p className="mb-2">Copyright © 2025 Tiamat Labs. All rights reserved.</p>
+              <p className="mb-2">Copyright © 2025 Tiamat. All rights reserved.</p>
               <div className="flex items-center justify-center lg:justify-end gap-2">
                 <img
                   src={`${import.meta.env.BASE_URL}logo.png`}
                   alt="Tiamat"
                   className="w-4 h-4 object-contain"
                 />
-                <span>Made with passion and Tiamat</span>
+                <span>Lets go Tiamat!</span>
               </div>
             </div>
           </div>
