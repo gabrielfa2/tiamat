@@ -119,7 +119,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-slate-900 overflow-hidden group">
+    <div className="relative w-full h-[75vh] md:h-auto md:aspect-[21/9] bg-slate-900 overflow-hidden group">
 
       {/* CAMADA 0: ÁREA MÁGICA (Z-20) - Ajustado para não bloquear o Menu */}
       {activeStream === 'none' && (
