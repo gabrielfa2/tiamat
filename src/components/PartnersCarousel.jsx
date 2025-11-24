@@ -3,12 +3,12 @@
 import React from 'react';
 
 const partners = [
-  { name: 'apex', logoSrc: '/apex.png' },
-  { name: 'c2', logoSrc: '/cs2.png' },
-  { name: 'ov2', logoSrc: '/ov2.png' },
-  { name: 'pubg', logoSrc: '/pubg.svg' },
-  { name: 'rb6', logoSrc: '/rb6.png' },
-  { name: 'vava', logoSrc: '/vava.png' },
+  { name: 'apex', logoSrc: `${import.meta.env.BASE_URL}apex.png` },
+  { name: 'c2', logoSrc: `${import.meta.env.BASE_URL}cs2.png` },
+  { name: 'ov2', logoSrc: `${import.meta.env.BASE_URL}ov2.png` },
+  { name: 'pubg', logoSrc: `${import.meta.env.BASE_URL}pubg.svg` },
+  { name: 'rb6', logoSrc: `${import.meta.env.BASE_URL}rb6.png` },
+  { name: 'vava', logoSrc: `${import.meta.env.BASE_URL}vava.png` },
 ];
 
 const extendedPartners = Array(5).fill([...partners]).flat();

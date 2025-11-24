@@ -7,7 +7,7 @@ const TeamBanner = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/imagemteam.png"
+            src={`${import.meta.env.BASE_URL}imagemteam.png`}
             alt="Tiamat Team"
             className="w-full h-full object-cover object-center"
           />

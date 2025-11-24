@@ -23,7 +23,7 @@ const Footer = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-purple-600 to-blue-600 p-1">
                 <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
                   <img
-                    src="/logo.png"
+                    src={`${import.meta.env.BASE_URL}logo.png`}
                     alt="Tiamat"
                     className="w-16 h-16 object-contain"
                   />
@@ -98,7 +98,7 @@ const Footer = () => {
               <p className="mb-2">Copyright © 2025 Tiamat Labs. All rights reserved.</p>
               <div className="flex items-center justify-center lg:justify-end gap-2">
                 <img
-                  src="/logo.png"
+                  src={`${import.meta.env.BASE_URL}logo.png`}
                   alt="Tiamat"
                   className="w-4 h-4 object-contain"
                 />

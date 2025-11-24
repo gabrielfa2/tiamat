@@ -94,7 +94,7 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <img
-                src="/logo.png"
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="Logo"
                 className="h-12 w-auto object-contain"
               />
@@ -265,7 +265,7 @@ const Header = () => {
               <div className="col-span-4">
                 <Link to="/products/1" className="group block">
                   <div className="relative aspect-[3/4] rounded overflow-hidden">
-                    <img src="/dps.png" alt="Check our jerseys" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img src={`${import.meta.env.BASE_URL}dps.png`} alt="Check our jerseys" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="text-white font-bold text-sm tracking-wider">CHECK OUR JERSEYS</p>
@@ -367,3 +367,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

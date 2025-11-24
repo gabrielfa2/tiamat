@@ -155,12 +155,12 @@ const ProductsSection = () => {
 
       const { top, height } = sliderElement.getBoundingClientRect();
       const screenHeight = window.innerHeight;
-      
+
       const start = screenHeight;
       const end = screenHeight / 2 - height / 2;
-      
+
       const progress = Math.max(0, Math.min(1, (top - end) / (start - end)));
-      const translateX = 50 * progress; 
+      const translateX = 50 * progress;
 
       sliderElement.style.transform = `translateX(${translateX}%)`;
       sliderElement.style.opacity = `${1 - progress}`;
@@ -176,12 +176,12 @@ const ProductsSection = () => {
     <section className="py-16 h-[100vh] overflow-x-hidden">
       <div className="max-w-screen-xl mx-auto px-4 h-full sticky top-0 flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-          
+
           <div className="text-white text-center lg:text-left">
             <span className="text-purple-400 font-bold tracking-wider">NOVO LANÇAMENTO</span>
             <h2 className="text-4xl md:text-5xl font-bold my-4">TIAMAT JERSEY 1.2025</h2>
             <p className="text-gray-300 text-lg mb-8 max-w-lg mx-auto lg:mx-0">
-              A nova era da performance chegou. Nosso mais novo uniforme oficial, 
+              A nova era da performance chegou. Nosso mais novo uniforme oficial,
               desenhado para máximo conforto e estilo dentro e fora de jogo. Arraste para ver os detalhes.
             </p>
             <div className="flex justify-center lg:justify-start">
@@ -189,7 +189,7 @@ const ProductsSection = () => {
             </div>
           </div>
 
-          <div 
+          <div
             ref={sliderRef}
             // ALTERAÇÃO 1: Trocado 'w-full' por 'w-fit' e adicionado 'lg:mx-0'
             className="w-fit max-w-lg mx-auto lg:mx-0 lg:max-w-none transition-transform duration-100 ease-out lg:col-span-1"
@@ -197,8 +197,8 @@ const ProductsSection = () => {
             <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-700">
               {/* ALTERAÇÃO 2: Adicionada a propriedade value="30" */}
               <ImgComparisonSlider value="30">
-                <img slot="first" src="/dps.png" alt="Frente da camisa" />
-                <img slot="second" src="/antes.png" alt="Costas da camisa" />
+                <img slot="first" src={`${import.meta.env.BASE_URL}dps.png`} alt="Frente da camisa" />
+                <img slot="second" src={`${import.meta.env.BASE_URL}antes.png`} alt="Costas da camisa" />
               </ImgComparisonSlider>
             </div>
           </div>

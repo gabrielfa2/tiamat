@@ -113,7 +113,7 @@ const LoginPage = () => {
               <form className="form" onSubmit={handleForgotPassword}>
                 <div className="logo">
                   <img
-                    src="/logosemfundo.png"
+                    src={`${import.meta.env.BASE_URL}logosemfundo.png`}
                     alt="Tiamat"
                     className="logo-img"
                   />
@@ -151,7 +151,7 @@ const LoginPage = () => {
               <form className="form" onSubmit={handleSubmit}>
                 <div className="logo">
                   <img
-                    src="/logosemfundo.png"
+                    src={`${import.meta.env.BASE_URL}logosemfundo.png`}
                     alt="Tiamat"
                     className="logo-img"
                   />
