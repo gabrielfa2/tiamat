@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VideoSection = () => {
-  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/intro.mp4';
+  const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotelainicial.mp4';
   const posterUrl = '/bannertemp.png';
 
   return (
