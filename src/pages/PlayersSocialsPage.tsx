@@ -8,9 +8,9 @@ const PlayersSocialsPage = () => {
   const players = [
     {
       id: 1,
-      name: 'DRAGONFIRE',
-      realName: 'Marcus Silva',
-      role: 'Team Lead',
+      name: 'yellow flash',
+      realName: 'Gabriel Freitas',
+      role: 'Duelist',
       image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
       socials: {
         instagram: '#',
@@ -21,9 +21,9 @@ const PlayersSocialsPage = () => {
     },
     {
       id: 2,
-      name: 'VENOM',
-      realName: 'João Santos',
-      role: 'Professional Player',
+      name: 'beasois',
+      realName: 'Beatriz Sales',
+      role: 'Controller',
       image: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=400',
       socials: {
         instagram: '#',
@@ -34,9 +34,9 @@ const PlayersSocialsPage = () => {
     },
     {
       id: 3,
-      name: 'SHADOW',
-      realName: 'Pedro Costa',
-      role: 'Professional Player',
+      name: 'Magoraga',
+      realName: 'Eduardo Masquerano',
+      role: 'Sentinel',
       image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
       socials: {
         instagram: '#',
@@ -47,9 +47,9 @@ const PlayersSocialsPage = () => {
     },
     {
       id: 4,
-      name: 'STORM',
-      realName: 'Lucas Oliveira',
-      role: 'Professional Player',
+      name: 'fcosta',
+      realName: 'Lethicia Fernanda',
+      role: 'Controller',
       image: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=400',
       socials: {
         instagram: '#',
@@ -60,9 +60,9 @@ const PlayersSocialsPage = () => {
     },
     {
       id: 5,
-      name: 'CHAOS',
-      realName: 'Rafael Lima',
-      role: 'Professional Player',
+      name: 'Myr4gem',
+      realName: 'Myrlla Gurgel',
+      role: 'Initiator',
       image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=400',
       socials: {
         instagram: '#',
