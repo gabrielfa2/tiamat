@@ -23,7 +23,7 @@ const RankingPage = () => {
       id: '1',
       rank: 1,
       name: 'TIAMAT',
-      logo: '/logo.png',
+      logo: `${import.meta.env.BASE_URL}logo.png`,
       region: 'LATAM',
       points: 1500,
       wins: 45,
@@ -171,31 +171,28 @@ const RankingPage = () => {
         <div className="mb-8 flex gap-3">
           <button
             onClick={() => setSelectedGame('all')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${
-              selectedGame === 'all'
+            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'all'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-            }`}
+              }`}
           >
             ALL GAMES
           </button>
           <button
             onClick={() => setSelectedGame('cs2')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${
-              selectedGame === 'cs2'
+            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'cs2'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-            }`}
+              }`}
           >
             CS2
           </button>
           <button
             onClick={() => setSelectedGame('valorant')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${
-              selectedGame === 'valorant'
+            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'valorant'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-            }`}
+              }`}
           >
             VALORANT
           </button>
@@ -238,9 +235,8 @@ const RankingPage = () => {
                 {teams.map((team, index) => (
                   <tr
                     key={team.id}
-                    className={`border-b border-slate-700 hover:bg-slate-700/50 transition-colors ${
-                      index % 2 === 0 ? 'bg-slate-800/50' : 'bg-slate-800'
-                    }`}
+                    className={`border-b border-slate-700 hover:bg-slate-700/50 transition-colors ${index % 2 === 0 ? 'bg-slate-800/50' : 'bg-slate-800'
+                      }`}
                   >
                     <td className="px-6 py-4">
                       <div className={`${getRankBgColor(team.rank)} w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white`}>

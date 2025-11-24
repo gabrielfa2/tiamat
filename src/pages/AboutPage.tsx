@@ -69,9 +69,9 @@ const AboutPage = () => {
     <div className="pt-1 pb-1">
       {/* Hero Section */}
       <div className="relative h-96 mb-16 overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/bannertemp.png)' }}
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bannertemp.png)` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-blue-900/80"></div>
         </div>
@@ -104,11 +104,11 @@ const AboutPage = () => {
           <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-8 rounded-lg border border-slate-700">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">OUR MISSION</h2>
             <p className="text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
-              At Tiamat Esports, we believe in the power of competitive gaming to bring people together, 
-              push boundaries, and create unforgettable moments. Our mission is to build the most dominant 
-              and respected esports organization in the world, while fostering a community that celebrates 
-              skill, dedication, and the relentless pursuit of victory. Like the primordial dragon of chaos 
-              from which we take our name, we embrace the unpredictable nature of competition and transform 
+              At Tiamat Esports, we believe in the power of competitive gaming to bring people together,
+              push boundaries, and create unforgettable moments. Our mission is to build the most dominant
+              and respected esports organization in the world, while fostering a community that celebrates
+              skill, dedication, and the relentless pursuit of victory. Like the primordial dragon of chaos
+              from which we take our name, we embrace the unpredictable nature of competition and transform
               it into our greatest strength.
             </p>
           </div>
@@ -136,7 +136,7 @@ const AboutPage = () => {
           <div className="relative">
             {/* Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-600 to-blue-600"></div>
-            
+
             {timeline.map((item, index) => (
               <div key={index} className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                 <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
@@ -146,10 +146,10 @@ const AboutPage = () => {
                     <p className="text-gray-400 text-sm">{item.description}</p>
                   </div>
                 </div>
-                
+
                 {/* Timeline Dot */}
                 <div className="w-4 h-4 bg-purple-600 rounded-full border-4 border-slate-900 z-10"></div>
-                
+
                 <div className="w-1/2"></div>
               </div>
             ))}

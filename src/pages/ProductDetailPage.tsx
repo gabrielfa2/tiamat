@@ -7,7 +7,7 @@ const ProductDetailPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { dispatch } = useCart();
-  
+
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
@@ -19,7 +19,7 @@ const ProductDetailPage = () => {
     name: 'TIAMAT JERSEY 2025',
     price: '€89.99',
     originalPrice: '€99.99',
-    image: '/dps.png',
+    image: `${import.meta.env.BASE_URL}dps.png`,
     category: 'jerseys',
     isNew: true,
     isCustomizable: true,
@@ -38,10 +38,10 @@ const ProductDetailPage = () => {
   };
 
   const productImages = [
-    '/dps.png',
-    '/antes.png',
-    '/dps.png',
-    '/antes.png'
+    `${import.meta.env.BASE_URL}dps.png`,
+    `${import.meta.env.BASE_URL}antes.png`,
+    `${import.meta.env.BASE_URL}dps.png`,
+    `${import.meta.env.BASE_URL}antes.png`
   ];
 
   const handleAddToCart = () => {
@@ -70,7 +70,7 @@ const ProductDetailPage = () => {
     <div className="pt-32 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
-        <button 
+        <button
           onClick={() => navigate('/products')}
           className="flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8 transition-colors"
         >
@@ -83,25 +83,24 @@ const ProductDetailPage = () => {
           <div className="space-y-4">
             {/* Main Image */}
             <div className="aspect-square rounded-lg overflow-hidden bg-slate-800 border border-slate-700">
-              <img 
-                src={productImages[selectedImage]} 
+              <img
+                src={productImages[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
             </div>
-            
+
             {/* Thumbnail Images */}
             <div className="grid grid-cols-4 gap-4">
               {productImages.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                    selectedImage === index ? 'border-purple-500' : 'border-slate-700 hover:border-slate-600'
-                  }`}
+                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${selectedImage === index ? 'border-purple-500' : 'border-slate-700 hover:border-slate-600'
+                    }`}
                 >
-                  <img 
-                    src={image} 
+                  <img
+                    src={image}
                     alt={`${product.name} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
@@ -132,7 +131,7 @@ const ProductDetailPage = () => {
                 )}
                 <span className="text-green-400 font-bold">10% OFF</span>
               </div>
-              
+
               {/* Rating */}
               <div className="flex items-center gap-2">
                 <div className="flex">
@@ -155,11 +154,10 @@ const ProductDetailPage = () => {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`py-2 px-4 border rounded font-bold transition-colors ${
-                      selectedSize === size
+                    className={`py-2 px-4 border rounded font-bold transition-colors ${selectedSize === size
                         ? 'border-purple-500 bg-purple-600 text-white'
                         : 'border-slate-600 text-gray-300 hover:border-slate-500'
-                    }`}
+                      }`}
                   >
                     {size}
                   </button>
@@ -175,11 +173,10 @@ const ProductDetailPage = () => {
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`w-full py-3 px-4 border rounded font-bold transition-colors text-left ${
-                      selectedColor === color
+                    className={`w-full py-3 px-4 border rounded font-bold transition-colors text-left ${selectedColor === color
                         ? 'border-purple-500 bg-purple-600 text-white'
                         : 'border-slate-600 text-gray-300 hover:border-slate-500'
-                    }`}
+                      }`}
                   >
                     {color}
                   </button>
@@ -197,11 +194,10 @@ const ProductDetailPage = () => {
               </button>
               <button
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`p-4 border rounded transition-colors ${
-                  isWishlisted
+                className={`p-4 border rounded transition-colors ${isWishlisted
                     ? 'border-red-500 bg-red-600 text-white'
                     : 'border-slate-600 text-gray-300 hover:border-slate-500'
-                }`}
+                  }`}
               >
                 <Heart className={`h-6 w-6 ${isWishlisted ? 'fill-current' : ''}`} />
               </button>

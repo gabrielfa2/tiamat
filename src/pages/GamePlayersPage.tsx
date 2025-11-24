@@ -9,7 +9,7 @@ const GamePlayersPage = () => {
   const gameData = {
     'cs2': {
       name: 'COUNTER STRIKE 2',
-      logo: '/cs2.png',
+      logo: `${import.meta.env.BASE_URL}cs2.png`,
       description: 'Team Tiamat dominates Counter-Strike 2 with victories at major tournaments. Precision, cohesion and a thirst for victory propel us to the top of FPS esports.',
       players: [
         {
@@ -61,7 +61,7 @@ const GamePlayersPage = () => {
     },
     'valorant': {
       name: 'VALORANT',
-      logo: '/vava.png',
+      logo: `${import.meta.env.BASE_URL}vava.png`,
       description: 'Our Valorant team combines tactical excellence with individual skill to dominate the competitive scene.',
       players: [
         {
@@ -69,7 +69,7 @@ const GamePlayersPage = () => {
           name: 'DUELISTA',
           realName: 'Gabriel Araújo',
           role: 'Duelist',
-          image: '/gabriel.png',
+          image: `${import.meta.env.BASE_URL}gabriel.png`,
           stats: { kd: '1.38', rating: '1.28', headshot: '44%' },
           achievements: ['VCT Champions 2024', 'Masters Berlin 2024']
         },
@@ -78,7 +78,7 @@ const GamePlayersPage = () => {
           name: 'INICIADOR',
           realName: 'Myrlla Gurgel',
           role: 'Sentinel',
-          image: '/myrlla.png',
+          image: `${import.meta.env.BASE_URL}myrlla.png`,
           stats: { kd: '1.12', rating: '1.15', headshot: '22%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         },
@@ -87,7 +87,7 @@ const GamePlayersPage = () => {
           name: 'SENTINELA',
           realName: 'Eduardo Masquerano ',
           role: 'Initiator',
-          image: '/masqw.png',
+          image: `${import.meta.env.BASE_URL}masqw.png`,
           stats: { kd: '1.05', rating: '1.22', headshot: '19%' },
           achievements: ['Masters Berlin 2024', 'VCT Stage 2']
         },
@@ -96,7 +96,7 @@ const GamePlayersPage = () => {
           name: 'CONTROLADOR',
           realName: 'Fernanda Costa',
           role: 'Controller',
-          image: '/fer.PNG',
+          image: `${import.meta.env.BASE_URL}fer.PNG`,
           stats: { kd: '0.98', rating: '1.18', headshot: '21%' },
           achievements: ['VCT Champions 2024', 'Masters Reykjavik']
         },
@@ -105,7 +105,7 @@ const GamePlayersPage = () => {
           name: 'CONTROLADOR',
           realName: 'Beatriz Sales',
           role: 'Duelist',
-          image: '/bia.png',
+          image: `${import.meta.env.BASE_URL}bia.png`,
           stats: { kd: '1.42', rating: '1.35', headshot: '26%' },
           achievements: ['VCT Champions 2024', 'Game Changers 2024']
         }
@@ -119,7 +119,7 @@ const GamePlayersPage = () => {
     return (
       <div className="pt-32 pb-16 text-center">
         <h1 className="text-4xl font-bold text-white mb-4">Game Not Found</h1>
-        <button 
+        <button
           onClick={() => navigate('/games')}
           className="bg-purple-600 text-white px-6 py-3 rounded hover:bg-purple-700 transition-colors"
         >
@@ -133,7 +133,7 @@ const GamePlayersPage = () => {
     <div className="pt-32 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
-        <button 
+        <button
           onClick={() => navigate('/games')}
           className="flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8 transition-colors"
         >
@@ -143,8 +143,8 @@ const GamePlayersPage = () => {
 
         {/* Game Header */}
         <div className="flex items-center gap-6 mb-8">
-          <img 
-            src={currentGame.logo} 
+          <img
+            src={currentGame.logo}
             alt={currentGame.name}
             className="h-20 w-20 object-contain filter brightness-0 invert"
           />
@@ -191,13 +191,13 @@ const GamePlayersPage = () => {
               <div className="bg-slate-800 border border-slate-700 hover:border-purple-500 transition-all duration-300 overflow-hidden">
                 {/* Player Image */}
                 <div className="aspect-[3/4] relative overflow-hidden">
-                  <img 
-                    src={player.image} 
+                  <img
+                    src={player.image}
                     alt={player.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  
+
                   {/* Role Badge */}
                   <div className="absolute top-4 left-4">
                     <span className="bg-purple-600 text-white px-2 py-1 text-xs font-bold rounded">
@@ -210,7 +210,7 @@ const GamePlayersPage = () => {
                 <div className="p-4">
                   <h3 className="text-white font-bold text-lg mb-1">{player.name}</h3>
                   <p className="text-gray-400 text-sm mb-3">{player.realName}</p>
-                  
+
                   {/* Stats */}
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between text-sm">

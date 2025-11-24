@@ -2,7 +2,7 @@ import React from 'react';
 
 const VideoSection = () => {
   const videoUrl = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videotiamatpronto.mp4';
-  const posterUrl = '/bannertemp.png';
+  const posterUrl = `${import.meta.env.BASE_URL}bannertemp.png`;
 
   return (
     <section className="py-1">
@@ -34,4 +34,3 @@ const VideoSection = () => {
 };
 
 export default VideoSection;
-

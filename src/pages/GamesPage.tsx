@@ -10,7 +10,7 @@ const GamesPage = () => {
       id: 'cs2',
       name: 'COUNTER STRIKE 2',
       shortName: 'CS2',
-      image: '/cs2.png',
+      image: `${import.meta.env.BASE_URL}cs2.png`,
       background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['IEM Katowice 2024', 'BLAST Premier 2024'],
@@ -21,7 +21,7 @@ const GamesPage = () => {
       id: 'valorant',
       name: 'VALORANT',
       shortName: 'VAL',
-      image: '/vava.png',
+      image: `${import.meta.env.BASE_URL}vava.png`,
       background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['VCT Champions 2024', 'Masters Berlin 2024'],
@@ -32,7 +32,7 @@ const GamesPage = () => {
       id: 'apex',
       name: 'APEX LEGENDS',
       shortName: 'APEX',
-      image: '/apex.png',
+      image: `${import.meta.env.BASE_URL}apex.png`,
       background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 3,
       achievements: ['ALGS Championship 2024'],
@@ -43,7 +43,7 @@ const GamesPage = () => {
       id: 'rocket-league',
       name: 'ROCKET LEAGUE',
       shortName: 'RL',
-      image: '/pubg.svg',
+      image: `${import.meta.env.BASE_URL}pubg.svg`,
       background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 3,
       achievements: ['RLCS World Championship 2024'],
@@ -54,7 +54,7 @@ const GamesPage = () => {
       id: 'overwatch',
       name: 'OVERWATCH 2',
       shortName: 'OW2',
-      image: '/ov2.png',
+      image: `${import.meta.env.BASE_URL}ov2.png`,
       background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['OWL Season 2024'],
@@ -65,7 +65,7 @@ const GamesPage = () => {
       id: 'rainbow-six',
       name: 'RAINBOW SIX SIEGE',
       shortName: 'R6',
-      image: '/rb6.png',
+      image: `${import.meta.env.BASE_URL}rb6.png`,
       background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['Six Invitational 2024'],
@@ -93,21 +93,19 @@ const GamesPage = () => {
               onClick={() => game.status === 'active' && navigate(`/games/${game.id}/players`)}
               className={game.status === 'active' ? "group cursor-pointer" : "group cursor-not-allowed opacity-60"}
             >
-              <div className={`relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border transition-all duration-300 ${
-                game.status === 'active'
+              <div className={`relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border transition-all duration-300 ${game.status === 'active'
                   ? 'border-slate-700 hover:border-purple-500'
                   : 'border-slate-700'
-              }`}>
+                }`}>
                 {/* Background Image */}
                 <div className="absolute inset-0">
                   <img
                     src={game.background}
                     alt={game.name}
-                    className={`w-full h-full object-cover ${
-                      game.status === 'active'
+                    className={`w-full h-full object-cover ${game.status === 'active'
                         ? 'opacity-20 group-hover:opacity-30'
                         : 'opacity-10'
-                    } transition-opacity duration-300`}
+                      } transition-opacity duration-300`}
                   />
                 </div>
 
@@ -119,21 +117,19 @@ const GamesPage = () => {
                   <img
                     src={game.image}
                     alt={game.shortName}
-                    className={`h-16 w-16 object-contain ${
-                      game.status === 'active'
+                    className={`h-16 w-16 object-contain ${game.status === 'active'
                         ? 'filter brightness-0 invert group-hover:filter-none group-hover:drop-shadow-glow-purple transition-all duration-300'
                         : 'filter brightness-0 invert opacity-60'
-                    }`}
+                      }`}
                   />
                 </div>
 
                 {/* Status Badge */}
                 <div className="absolute top-6 right-6">
-                  <span className={`text-white px-3 py-1 text-xs font-bold rounded-full ${
-                    game.status === 'active'
+                  <span className={`text-white px-3 py-1 text-xs font-bold rounded-full ${game.status === 'active'
                       ? 'bg-green-600'
                       : 'bg-gray-600'
-                  }`}>
+                    }`}>
                     {game.status === 'active' ? 'ACTIVE' : 'COMING SOON'}
                   </span>
                 </div>

@@ -13,7 +13,7 @@ const ProductsPage = () => {
       name: 'TIAMAT JERSEY 2025',
       price: '€89.99',
       originalPrice: '€99.99',
-      image: '/dps.png',
+      image: `${import.meta.env.BASE_URL}dps.png`,
       category: 'jerseys',
       isNew: true,
       isCustomizable: true,
@@ -78,8 +78,8 @@ const ProductsPage = () => {
     { id: 'accessories', name: 'ACCESSORIES' }
   ];
 
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
+  const filteredProducts = selectedCategory === 'all'
+    ? products
     : products.filter(product => product.category === selectedCategory);
 
   return (
@@ -99,11 +99,10 @@ const ProductsPage = () => {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 font-medium transition-colors ${
-                  selectedCategory === category.id
+                className={`px-4 py-2 font-medium transition-colors ${selectedCategory === category.id
                     ? 'bg-purple-600 text-white'
                     : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-                }`}
+                  }`}
               >
                 {category.name}
               </button>
@@ -131,24 +130,23 @@ const ProductsPage = () => {
         </div>
 
         {/* Products Grid */}
-        <div className={`grid gap-6 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+        <div className={`grid gap-6 ${viewMode === 'grid'
+            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
             : 'grid-cols-1'
-        }`}>
+          }`}>
           {filteredProducts.map(product => (
-            <div 
-              key={product.id} 
+            <div
+              key={product.id}
               className="group cursor-pointer"
               onClick={() => navigate(`/products/${product.id}`)}
             >
               <div className="relative aspect-square rounded-lg overflow-hidden mb-4">
-                <img 
-                  src={product.image} 
+                <img
+                  src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                
+
                 {/* Badges */}
                 <div className="absolute top-3 left-3 flex flex-col gap-2">
                   {product.isNew && (
