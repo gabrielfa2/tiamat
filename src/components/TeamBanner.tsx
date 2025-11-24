@@ -3,7 +3,7 @@ import React from 'react';
 const TeamBanner = () => {
   return (
     <section className="relative w-full overflow-hidden bg-slate-900">
-      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
+      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[400px]">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
