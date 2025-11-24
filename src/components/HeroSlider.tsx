@@ -3,14 +3,15 @@ import PartnersCarousel from './PartnersCarousel';
 
 // --- CONFIGURAÇÃO ---
 
-// 1. Twitch (Automático): Coloque o nome do canal.
+// 1. Twitch (Automático)
 const TWITCH_CHANNEL = ''; 
 
-// 2. YouTube (Manual):
-// Quando for abrir live no YouTube, cole o ID do vídeo aqui.
-// O ID é a parte final da URL: youtube.com/watch?v=XXXXXXXX
-// Se não tiver live no YouTube, deixe como uma string vazia: ''
-const YOUTUBE_VIDEO_ID = ''; // Exemplo: 'jfKfPfyJRdk'
+// 2. YouTube (Manual)
+const YOUTUBE_VIDEO_ID = ''; 
+
+// 3. Vídeo do Hover (O "Reveal")
+// Substitua por um vídeo curto (3-5s) de alta qualidade
+const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videohover.mp4';
 
 declare global {
   interface Window {
@@ -22,14 +23,15 @@ type StreamSource = 'twitch' | 'youtube' | 'none';
 
 const HeroSlider = () => {
   const [activeStream, setActiveStream] = useState<StreamSource>('none');
+  const [isHoverVideoVisible, setIsHoverVideoVisible] = useState(false);
+  
   const playerRef = useRef<HTMLDivElement>(null);
   const twitchPlayer = useRef<any>(null);
+  const hoverVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Imagem de Background (Fallback)
   const imageUrl = `${import.meta.env.BASE_URL}bannertemp.png`; 
 
   useEffect(() => {
-    // Carrega o script da Twitch
     const loadTwitchScript = () => {
       if (document.getElementById('twitch-embed-script')) return;
       const script = document.createElement('script');
@@ -40,16 +42,12 @@ const HeroSlider = () => {
 
     loadTwitchScript();
 
-    // Verifica se deve mostrar o YouTube imediatamente (caso a Twitch demore ou falhe)
-    // Se tiver um ID configurado manualmente, já preparamos o terreno
     if (YOUTUBE_VIDEO_ID) {
-        // Se não tiver player da Twitch ainda, assume YouTube por enquanto
         if (!twitchPlayer.current) {
             setActiveStream('youtube');
         }
     }
 
-    // Inicializa o Player da Twitch e os "ouvintes" de estado
     const initPlayer = setInterval(() => {
       if (window.Twitch && window.Twitch.Player && playerRef.current && !twitchPlayer.current) {
         clearInterval(initPlayer);
@@ -68,18 +66,14 @@ const HeroSlider = () => {
 
         twitchPlayer.current = player;
 
-        // --- EVENTOS DA TWITCH ---
-        
-        // 1. Twitch ficou ONLINE -> Ela ganha prioridade total
         player.addEventListener(window.Twitch.Player.ONLINE, () => {
-          console.log('Twitch está ONLINE');
+          console.log('Twitch Online');
           setActiveStream('twitch');
           player.setMuted(true); 
         });
 
-        // 2. Twitch ficou OFFLINE -> Verificamos se tem YouTube manual configurado
         player.addEventListener(window.Twitch.Player.OFFLINE, () => {
-          console.log('Twitch está OFFLINE');
+          console.log('Twitch Offline');
           if (YOUTUBE_VIDEO_ID) {
             setActiveStream('youtube');
           } else {
@@ -92,10 +86,72 @@ const HeroSlider = () => {
     return () => clearInterval(initPlayer);
   }, []);
 
+  // --- HANDLERS DA ÁREA MÁGICA ---
+  const handleMagicEnter = () => {
+    if (hoverVideoRef.current) {
+      setIsHoverVideoVisible(true);
+      hoverVideoRef.current.play().catch(e => console.error("Erro play hover:", e));
+    }
+  };
+
+  const handleMagicLeave = () => {
+    if (hoverVideoRef.current) {
+      setIsHoverVideoVisible(false);
+      hoverVideoRef.current.pause();
+      hoverVideoRef.current.currentTime = 0; // Reseta para o início
+    }
+  };
+
   return (
     <div className="relative w-full aspect-[21/9] bg-slate-900 overflow-hidden group">
       
-      {/* --- CAMADA 1: PLAYER DA TWITCH --- */}
+      {/* =============================================
+          CAMADA 0: ÁREA MÁGICA (TRIGGER) - Z-INDEX 50
+          =============================================
+          Só existe se NÃO tiver live ativa.
+          É invisível e detecta o mouse.
+      */}
+      {activeStream === 'none' && (
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                     w-[35%] h-[60%] z-50 cursor-pointer"
+          onMouseEnter={handleMagicEnter}
+          onMouseLeave={handleMagicLeave}
+          // Use bg-red-500/20 aqui temporariamente se quiser visualizar onde está a área
+          style={{ backgroundColor: 'transparent' }} 
+        />
+      )}
+
+      {/* =============================================
+          CAMADA 1: VÍDEO DE HOVER (REVEAL) - Z-INDEX 40
+          =============================================
+          Aparece quando a área mágica é ativada.
+          Fica SOBRE a imagem estática, mas ABAIXO da área mágica (para não bloquear o mouseleave).
+          Pointer events none para o mouse passar "através" dele e continuar na área mágica.
+      */}
+      {activeStream === 'none' && (
+        <div 
+          className={`absolute inset-0 z-40 transition-opacity duration-500 pointer-events-none ${
+            isHoverVideoVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <video
+            ref={hoverVideoRef}
+            src={HOVER_VIDEO_URL}
+            className="w-full h-full object-cover"
+            muted
+            playsInline
+            // SEM LOOP: Para ele congelar no último frame
+          />
+          {/* Overlay leve opcional no vídeo */}
+          <div className="absolute inset-0 bg-black/10"></div>
+        </div>
+      )}
+
+      {/* =============================================
+          CAMADA 2: PLAYER DA TWITCH - Z-INDEX 30
+          =============================================
+      */}
       <div 
         ref={playerRef} 
         id="twitch-embed"
@@ -104,8 +160,10 @@ const HeroSlider = () => {
         }`}
       />
 
-      {/* --- CAMADA 2: PLAYER DO YOUTUBE --- */}
-      {/* Só é renderizado se houver um ID manual configurado e a Twitch estiver off */}
+      {/* =============================================
+          CAMADA 3: PLAYER DO YOUTUBE - Z-INDEX 20
+          =============================================
+      */}
       {activeStream === 'youtube' && YOUTUBE_VIDEO_ID && (
         <div className="absolute inset-0 z-20 w-full h-full">
           <iframe
@@ -116,12 +174,14 @@ const HeroSlider = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          {/* Overlay transparente para impedir cliques e manter função de banner */}
           <div className="absolute inset-0 bg-transparent"></div>
         </div>
       )}
 
-      {/* --- CAMADA 3: BANNER PADRÃO (IMAGEM) --- */}
+      {/* =============================================
+          CAMADA 4: BANNER PADRÃO (IMAGEM) - Z-INDEX 10
+          =============================================
+      */}
       <div 
         className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
           activeStream === 'none' ? 'opacity-100' : 'opacity-0'
@@ -131,18 +191,22 @@ const HeroSlider = () => {
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          <div className="relative h-full w-full flex flex-col items-center justify-center text-center text-white px-4">
+             {/* Conteúdo de Texto Opcional */}
+          </div>
         </div>
       </div>
 
-      {/* --- INDICADOR "AO VIVO" --- */}
+      {/* INDICADOR DE LIVE (SE HOUVER) */}
       {activeStream !== 'none' && (
-        <div className="absolute top-4 right-4 z-40 flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm animate-pulse shadow-lg">
+        <div className="absolute top-4 right-4 z-50 flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm animate-pulse shadow-lg">
           <div className="w-2 h-2 bg-white rounded-full"></div>
           {activeStream === 'twitch' ? 'TWITCH LIVE' : 'YOUTUBE LIVE'}
         </div>
       )}
 
-      {/* --- CONTROLE DE SOM (Apenas Twitch) --- */}
+      {/* CONTROLE DE SOM (TWITCH) */}
       {activeStream === 'twitch' && (
         <button 
             onClick={() => {
@@ -151,7 +215,7 @@ const HeroSlider = () => {
                     twitchPlayer.current.setMuted(!muted);
                 }
             }}
-            className="absolute bottom-24 right-4 z-40 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
+            className="absolute bottom-24 right-4 z-50 bg-black/50 hover:bg-purple-600 text-white p-2 rounded-full transition-colors"
         >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
