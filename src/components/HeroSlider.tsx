@@ -191,10 +191,6 @@ const HeroSlider = () => {
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="relative h-full w-full flex flex-col items-center justify-center text-center text-white px-4">
-             {/* Conteúdo de Texto Opcional */}
-          </div>
         </div>
       </div>
 
