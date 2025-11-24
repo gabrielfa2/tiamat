@@ -5,11 +5,11 @@ const TeamBanner = () => {
     <section className="relative w-full overflow-hidden bg-slate-900">
       <div className="flex flex-col md:block relative w-full md:h-[500px] lg:h-[400px]">
         {/* Background Image */}
-        <div className="relative h-64 md:absolute md:inset-0 w-full">
+        <div className="relative w-full md:absolute md:inset-0">
           <img
             src={`${import.meta.env.BASE_URL}imagemtime.png`}
             alt="Tiamat Team"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-auto md:h-full object-contain md:object-cover object-center md:object-center"
           />
           {/* Mobile Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent md:hidden"></div>
@@ -18,8 +18,11 @@ const TeamBanner = () => {
         {/* Desktop Gradient Overlay */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent pointer-events-none"></div>
 
+        {/* Decorative Element - Moved before content to avoid overlaying text */}
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none"></div>
+
         {/* Content Container */}
-        <div className="relative md:h-full max-w-7xl mx-auto px-4 py-8 md:py-0 flex items-center bg-slate-900 md:bg-transparent">
+        <div className="relative z-10 md:h-full max-w-7xl mx-auto px-4 py-8 md:py-0 flex items-center bg-slate-900 md:bg-transparent">
           <div className="max-w-xl">
             {/* Main Title */}
             <h2 className="text-4xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight">
@@ -52,9 +55,6 @@ const TeamBanner = () => {
             </button>
           </div>
         </div>
-
-        {/* Decorative Element - Optional */}
-        <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none"></div>
       </div>
     </section>
   );
