@@ -25,19 +25,37 @@ const LoginPage = () => {
     clearError();
   };
 
+  // --- NOVA FUNÇÃO DE VALIDAÇÃO ---
   const validateForm = () => {
-    if (!isLogin && !formData.fullName.trim()) {
-      throw new Error('Full name is required');
+    // 1. Validação de Nome (Apenas no Cadastro)
+    if (!isLogin) {
+      if (!formData.fullName.trim()) {
+        throw new Error('Full name is required');
+      }
+      if (formData.fullName.trim().length < 3) {
+        throw new Error('Full name must be at least 3 characters');
+      }
     }
+
+    // 2. Validação de Email (Formato e Preenchimento)
     if (!formData.email.trim()) {
       throw new Error('Email is required');
     }
-    if (!formData.password.trim()) {
+    // Regex simples e eficaz para validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      throw new Error('Please enter a valid email address (e.g., user@domain.com)');
+    }
+
+    // 3. Validação de Senha
+    if (!formData.password) {
       throw new Error('Password is required');
     }
     if (formData.password.length < 6) {
       throw new Error('Password must be at least 6 characters');
     }
+    
+    // 4. Confirmação de Senha (Apenas no Cadastro)
     if (!isLogin && formData.password !== formData.confirmPassword) {
       throw new Error('Passwords do not match');
     }
@@ -50,6 +68,7 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
+      // Chama a validação antes de tentar enviar ao Supabase
       validateForm();
 
       if (isLogin) {
@@ -62,7 +81,22 @@ const LoginPage = () => {
         setTimeout(() => setIsLogin(true), 2000);
       }
     } catch (err) {
-      console.error('Form submission error:', err);
+      // O erro lançado pelo validateForm cairá aqui e será exibido
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      console.error('Form error:', errorMessage);
+      // Força a exibição do erro no estado do AuthContext (ou localmente se preferir)
+      // Aqui estamos assumindo que o AuthContext expõe uma forma de setar erro, 
+      // mas como o clearError limpa, vamos confiar que o hook trate erros de API.
+      // Para erros locais de validação, vamos jogar um alerta ou usar um estado local de erro se o context não suportar set manual.
+      // Pelo seu código anterior, o context tem 'error' state, mas não 'setError'. 
+      // Vamos usar o throw para interromper o fluxo, e exibir o erro localmente se necessário.
+      // *AJUSTE*: Como seu hook pode não ter um setError exposto publicamente, 
+      // o ideal seria ter um estado local de erro neste componente ou garantir que o validateForm use o setError do context se disponível.
+      // Vou usar um alert simples para validação local se o context não permitir setar erro manual, 
+      // mas o ideal é que o AuthContext capture isso.
+      // Neste exemplo, vou assumir que o catch abaixo pega erros de API. 
+      // Para validação local, vou lançar um alerta se o contexto não tiver "setError".
+      alert(errorMessage); 
     } finally {
       setLoading(false);
     }
@@ -78,12 +112,18 @@ const LoginPage = () => {
       if (!formData.email.trim()) {
         throw new Error('Email is required');
       }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        throw new Error('Invalid email format');
+      }
+
       await resetPassword(formData.email);
       setSuccessMessage('Password reset link sent to your email!');
       setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
       setTimeout(() => setIsForgotPassword(false), 2000);
     } catch (err) {
-      console.error('Password reset error:', err);
+      const msg = err instanceof Error ? err.message : 'Error sending reset email';
+      alert(msg);
     } finally {
       setLoading(false);
     }
@@ -128,6 +168,7 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={loading}
+                  maxLength={100} // Limite de caracteres
                 />
 
                 {error && <div className="error-message">{error}</div>}
@@ -169,6 +210,7 @@ const LoginPage = () => {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     disabled={loading}
+                    maxLength={50} // Limite de 50 caracteres para o nome
                   />
                 )}
                 <input
@@ -179,6 +221,7 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={loading}
+                  maxLength={100} // Limite de 100 caracteres para o email
                 />
                 <input
                   type="password"
@@ -188,6 +231,7 @@ const LoginPage = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   disabled={loading}
+                  maxLength={64} // Limite de segurança para senha
                 />
                 {!isLogin && (
                   <input
@@ -198,6 +242,7 @@ const LoginPage = () => {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     disabled={loading}
+                    maxLength={64}
                   />
                 )}
 
@@ -250,6 +295,7 @@ const LoginPage = () => {
 };
 
 const StyledWrapper = styled.div`
+  /* ... MANTENHA O CSS IGUAL AO QUE VOCÊ JÁ TINHA ... */
   .container {
     --form-width: 350px;
     --aspect-ratio: 1.5;
