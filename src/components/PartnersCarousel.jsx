@@ -16,7 +16,7 @@ const PartnersCarousel = () => {
     // 1. Adicionei "group/partners" e "z-30"
     // "group/partners": Isola o hover deste componente do resto do Hero.
     // "z-30": Garante que o carrossel fique acima do player da Twitch/YouTube.
-    <div className="absolute bottom-0 left-0 right-0 bg-slate-800 py-4 border-t border-slate-700 overflow-hidden z-30 group/partners">
+    <div className="absolute bottom-0 left-0 right-0 bg-slate-800 py-4 border-t border-slate-700 overflow-hidden z-50 group/partners">
       <div
         className="relative w-full overflow-hidden"
         style={{
