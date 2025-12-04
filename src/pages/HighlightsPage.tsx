@@ -132,7 +132,7 @@ const HighlightsPage = () => {
   };
 
   return (
-    <div className="pt-12 pb-12 bg-slate-900 min-h-screen">
+    <div className="pt-32 pb-16 bg-slate-900 min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
         <button
@@ -155,28 +155,31 @@ const HighlightsPage = () => {
         <div className="mb-8 flex flex-wrap gap-3">
           <button
             onClick={() => setSelectedGame('all')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'all'
+            className={`px-6 py-2 rounded font-bold transition-colors ${
+              selectedGame === 'all'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-              }`}
+            }`}
           >
             ALL CONTENT
           </button>
           <button
             onClick={() => setSelectedGame('CS2')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'CS2'
+            className={`px-6 py-2 rounded font-bold transition-colors ${
+              selectedGame === 'CS2'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-              }`}
+            }`}
           >
             CS2
           </button>
           <button
             onClick={() => setSelectedGame('VALORANT')}
-            className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'VALORANT'
+            className={`px-6 py-2 rounded font-bold transition-colors ${
+              selectedGame === 'VALORANT'
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
-              }`}
+            }`}
           >
             VALORANT
           </button>

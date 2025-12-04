@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ============================================
    GAME INVENTORY UI - CSS UTILITIES
    Clip-path, Rarity System, Glassmorphism
@@ -339,3 +340,346 @@
   width: 300px;
   height: 300px;
 }
+=======
+/* ============================================
+   GAME INVENTORY UI - CSS UTILITIES
+   Clip-path, Rarity System, Glassmorphism
+   ============================================ */
+
+/* ========== CLIP-PATH UTILITIES (ANGULAR/CHAMFERED CORNERS) ========== */
+
+.clip-chamfer {
+  clip-path: polygon(
+    8px 0%, 
+    100% 0%, 
+    100% calc(100% - 8px), 
+    calc(100% - 8px) 100%, 
+    0% 100%, 
+    0% 8px
+  );
+}
+
+.clip-chamfer-lg {
+  clip-path: polygon(
+    12px 0%, 
+    100% 0%, 
+    100% calc(100% - 12px), 
+    calc(100% - 12px) 100%, 
+    0% 100%, 
+    0% 12px
+  );
+}
+
+.clip-chamfer-xl {
+  clip-path: polygon(
+    16px 0%, 
+    100% 0%, 
+    100% calc(100% - 16px), 
+    calc(100% - 16px) 100%, 
+    0% 100%, 
+    0% 16px
+  );
+}
+
+/* ========== RARITY SYSTEM COLORS ========== */
+
+:root {
+  --rarity-legendary: #fbbf24; /* yellow-400 */
+  --rarity-epic: #a855f7;      /* purple-500 */
+  --rarity-rare: #60a5fa;      /* blue-400 */
+  --rarity-common: #9ca3af;    /* gray-400 */
+}
+
+/* Rarity border classes */
+.border-rarity-legendary {
+  border-color: var(--rarity-legendary);
+}
+
+.border-rarity-epic {
+  border-color: var(--rarity-epic);
+}
+
+.border-rarity-rare {
+  border-color: var(--rarity-rare);
+}
+
+.border-rarity-common {
+  border-color: var(--rarity-common);
+}
+
+/* Rarity glow/shadow classes */
+.shadow-rarity-legendary {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-rarity-epic {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-rarity-rare {
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.5), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-rarity-common {
+  box-shadow: 0 0 15px rgba(156, 163, 175, 0.3), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover glow effects for cards */
+.hover-glow-legendary:hover {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.7), 0 0 60px rgba(251, 191, 36, 0.3);
+  border-color: var(--rarity-legendary);
+}
+
+.hover-glow-epic:hover {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.7), 0 0 60px rgba(168, 85, 247, 0.3);
+  border-color: var(--rarity-epic);
+}
+
+.hover-glow-rare:hover {
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.7), 0 0 60px rgba(96, 165, 250, 0.3);
+  border-color: var(--rarity-rare);
+}
+
+.hover-glow-common:hover {
+  box-shadow: 0 0 25px rgba(156, 163, 175, 0.5), 0 0 50px rgba(156, 163, 175, 0.2);
+  border-color: var(--rarity-common);
+}
+
+/* ========== GLASSMORPHISM ========== */
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.glass-darker {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ========== GAME UI ANIMATIONS ========== */
+
+/* Pulsing glow for buttons */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow-color, #a855f7), 0 0 40px var(--glow-color, #a855f7);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--glow-color, #a855f7), 0 0 60px var(--glow-color, #a855f7);
+  }
+}
+
+.glow-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.glow-pulse-legendary {
+  --glow-color: #fbbf24;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.glow-pulse-epic {
+  --glow-color: #a855f7;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.glow-pulse-rare {
+  --glow-color: #60a5fa;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Shimmer effect for rarity borders */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ========== STAT BARS ========== */
+
+.stat-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--fill-color, #a855f7), var(--fill-color-light, #c084fc));
+  transition: width 0.6s ease-out;
+  box-shadow: 0 0 10px var(--fill-color, #a855f7);
+}
+
+.stat-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* ========== INVENTORY GRID ========== */
+
+.inventory-cell {
+  aspect-ratio: 1 / 1;
+  background: rgba(15, 23, 42, 0.6);
+  border: 2px solid rgba(71, 85, 105, 0.5);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.inventory-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+
+/* ========== TECH GRID PATTERN ========== */
+
+.tech-grid-bg {
+  background-image: 
+    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ========== MONOSPACED CREDITS DISPLAY ========== */
+
+.credits-display {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* ========== GAME TAB STYLING ========== */
+
+.game-tab {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 2px solid rgba(71, 85, 105, 0.5);
+  background: rgba(15, 23, 42, 0.6);
+  transition: all 0.3s ease;
+}
+
+.game-tab.active {
+  background: rgba(124, 58, 237, 0.3);
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.game-tab:hover:not(.active) {
+  background: rgba(71, 85, 105, 0.3);
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+/* ========== INSPECT BUTTON ========== */
+
+.inspect-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  color: #a855f7;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.inspect-btn:hover {
+  border-color: #a855f7;
+  color: white;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(168, 85, 247, 0.4));
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.inspect-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.inspect-btn:hover::before {
+  left: 100%;
+}
+
+/* ========== EQUIP BUTTON ========== */
+
+.equip-btn {
+  position: relative;
+  overflow: hidden;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.equip-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.equip-btn:hover::after {
+  width: 300px;
+  height: 300px;
+}
+>>>>>>> a45c5447fb0db915367df1aaea32ac002359a831

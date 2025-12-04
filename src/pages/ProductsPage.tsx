@@ -132,7 +132,7 @@ const ProductsPage = () => {
   };
 
   return (
-    <div className="pt-12 pb-12 tech-grid-bg min-h-screen">
+    <div className="pt-32 pb-16 tech-grid-bg min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
@@ -148,8 +148,9 @@ const ProductsPage = () => {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`game-tab clip-chamfer ${selectedCategory === category.id ? 'active' : ''
-                  }`}
+                className={`game-tab clip-chamfer ${
+                  selectedCategory === category.id ? 'active' : ''
+                }`}
               >
                 {category.name}
               </button>
@@ -177,10 +178,11 @@ const ProductsPage = () => {
         </div>
 
         {/* Products Grid - Inventory Style */}
-        <div className={`grid gap-4 ${viewMode === 'grid'
+        <div className={`grid gap-4 ${
+          viewMode === 'grid'
             ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
             : 'grid-cols-1'
-          }`}>
+        }`}>
           {filteredProducts.map(product => (
             <div
               key={product.id}
@@ -235,7 +237,7 @@ const ProductsPage = () => {
                   <h3 className="text-white font-bold text-sm uppercase tracking-wide leading-tight line-clamp-2">
                     {product.name}
                   </h3>
-
+                  
                   {/* Price Display - Credits Style */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -252,7 +254,7 @@ const ProductsPage = () => {
                   </div>
 
                   {/* Inspect Button */}
-                  <button
+                  <button 
                     className="inspect-btn w-full clip-chamfer text-xs py-2 flex items-center justify-center gap-2"
                     onClick={(e) => {
                       e.stopPropagation();

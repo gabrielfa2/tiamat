@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, Trophy } from 'lucide-react';
+import { Users, Trophy, Calendar } from 'lucide-react';
 
 const GamesPage = () => {
   const navigate = useNavigate();
-  const [hoveredGame, setHoveredGame] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Trigger animation on component mount
-  useEffect(() => {
-    const timer = setTimeout(() => setIsMounted(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
 
   const games = [
     {
@@ -19,7 +11,7 @@ const GamesPage = () => {
       name: 'COUNTER STRIKE 2',
       shortName: 'CS2',
       image: `${import.meta.env.BASE_URL}cs2.png`,
-      background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
+      background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['IEM Katowice 2024', 'BLAST Premier 2024'],
       description: 'Our CS2 team dominates the competitive scene with precision, strategy and teamwork.',
@@ -30,8 +22,7 @@ const GamesPage = () => {
       name: 'VALORANT',
       shortName: 'VAL',
       image: `${import.meta.env.BASE_URL}vava.png`,
-      background: `${import.meta.env.BASE_URL}vavagames.jpg`,
-      video: 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/phoenixtiamat.mp4',
+      background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['VCT Champions 2024', 'Masters Berlin 2024'],
       description: 'Tactical excellence meets individual skill in our Valorant roster.',
@@ -42,7 +33,7 @@ const GamesPage = () => {
       name: 'APEX LEGENDS',
       shortName: 'APEX',
       image: `${import.meta.env.BASE_URL}apex.png`,
-      background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
+      background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 3,
       achievements: ['ALGS Championship 2024'],
       description: 'Fast-paced battle royale action with our elite Apex Legends squad.',
@@ -64,7 +55,7 @@ const GamesPage = () => {
       name: 'OVERWATCH 2',
       shortName: 'OW2',
       image: `${import.meta.env.BASE_URL}ov2.png`,
-      background: 'https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800',
+      background: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800',
       players: 5,
       achievements: ['OWL Season 2024'],
       description: 'Strategic gameplay and hero mastery in the Overwatch League.',
@@ -84,7 +75,7 @@ const GamesPage = () => {
   ];
 
   return (
-    <div className="pt-12 pb-12">
+    <div className="pt-32 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -96,48 +87,26 @@ const GamesPage = () => {
 
         {/* Games Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {games.map((game, index) => (
+          {games.map(game => (
             <div
               key={game.id}
               onClick={() => game.status === 'active' && navigate(`/games/${game.id}/players`)}
-              onMouseEnter={() => setHoveredGame(game.id)}
-              onMouseLeave={() => setHoveredGame(null)}
-              className={`
-                group
-                transition-all duration-700 ease-out
-                ${isMounted ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}
-                ${game.status === 'active' ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}
-              `}
-              style={{
-                transitionDelay: `${index * 100}ms`
-              }}
+              className={game.status === 'active' ? "group cursor-pointer" : "group cursor-not-allowed opacity-60"}
             >
               <div className={`relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border transition-all duration-300 ${game.status === 'active'
-                ? 'border-slate-700 hover:border-purple-500'
-                : 'border-slate-700'
+                  ? 'border-slate-700 hover:border-purple-500'
+                  : 'border-slate-700'
                 }`}>
-
-                {/* Background Image/Video */}
+                {/* Background Image */}
                 <div className="absolute inset-0">
-                  {game.id === 'valorant' && (game as any).video && hoveredGame === 'valorant' ? (
-                    <video
-                      src={(game as any).video}
-                      autoPlay // Adicionado: Inicia sozinho ao renderizar
-                      loop     // Mantido: Garante o loop infinito
-                      muted    // Mantido: Necessário para autoplay na maioria dos navegadores
-                      playsInline
-                      className="w-full h-full object-cover opacity-100"
-                    />
-                  ) : (
-                    <img
-                      src={game.background}
-                      alt={game.name}
-                      className={`w-full h-full object-cover ${game.status === 'active'
-                        ? 'opacity-80 group-hover:opacity-80'
-                        : 'opacity-80'
-                        } transition-opacity duration-300`}
-                    />
-                  )}
+                  <img
+                    src={game.background}
+                    alt={game.name}
+                    className={`w-full h-full object-cover ${game.status === 'active'
+                        ? 'opacity-20 group-hover:opacity-30'
+                        : 'opacity-10'
+                      } transition-opacity duration-300`}
+                  />
                 </div>
 
                 {/* Gradient Overlay */}
@@ -149,8 +118,8 @@ const GamesPage = () => {
                     src={game.image}
                     alt={game.shortName}
                     className={`h-16 w-16 object-contain ${game.status === 'active'
-                      ? 'filter brightness-0 invert group-hover:filter-none group-hover:drop-shadow-glow-purple transition-all duration-300'
-                      : 'filter brightness-0 invert opacity-60'
+                        ? 'filter brightness-0 invert group-hover:filter-none group-hover:drop-shadow-glow-purple transition-all duration-300'
+                        : 'filter brightness-0 invert opacity-60'
                       }`}
                   />
                 </div>
@@ -158,8 +127,8 @@ const GamesPage = () => {
                 {/* Status Badge */}
                 <div className="absolute top-6 right-6">
                   <span className={`text-white px-3 py-1 text-xs font-bold rounded-full ${game.status === 'active'
-                    ? 'bg-green-600'
-                    : 'bg-gray-600'
+                      ? 'bg-green-600'
+                      : 'bg-gray-600'
                     }`}>
                     {game.status === 'active' ? 'ACTIVE' : 'COMING SOON'}
                   </span>
@@ -207,9 +176,7 @@ const GamesPage = () => {
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-8 rounded-lg">
             <h2 className="text-3xl font-bold text-white mb-4">JOIN THE TIAMAT FAMILY</h2>
             <p className="text-gray-200 mb-6">Think you have what it takes to compete at the highest level?</p>
-            <button
-              onClick={() => navigate('/about/contact')}
-              className="bg-white text-purple-600 px-8 py-3 font-bold rounded hover:bg-gray-100 transition-colors">
+            <button className="bg-white text-purple-600 px-8 py-3 font-bold rounded hover:bg-gray-100 transition-colors">
               APPLY NOW
             </button>
           </div>

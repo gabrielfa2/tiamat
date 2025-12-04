@@ -125,7 +125,7 @@ const LastTourPage = () => {
   };
 
   return (
-    <div className="pt-12 pb-12 bg-slate-900 min-h-screen">
+    <div className="pt-32 pb-16 bg-slate-900 min-h-screen">
       <div className="max-w-6xl mx-auto px-4">
         {/* Back Button */}
         <button
@@ -191,16 +191,18 @@ const LastTourPage = () => {
                     <div className="text-white font-bold">{match.opponent}</div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className={`px-3 py-1 rounded font-bold text-sm ${match.result === 'win'
+                    <span className={`px-3 py-1 rounded font-bold text-sm ${
+                      match.result === 'win'
                         ? 'bg-green-600 text-white'
                         : 'bg-red-600 text-white'
-                      }`}>
+                    }`}>
                       {match.result === 'win' ? 'WIN' : 'LOSS'}
                     </span>
                     <span className="text-gray-400 text-sm">{match.game}</span>
                     <ChevronDown
-                      className={`h-5 w-5 text-gray-400 transition-transform ${expandedMatch === match.id ? 'rotate-180' : ''
-                        }`}
+                      className={`h-5 w-5 text-gray-400 transition-transform ${
+                        expandedMatch === match.id ? 'rotate-180' : ''
+                      }`}
                     />
                   </div>
                 </div>
@@ -228,9 +230,11 @@ const LastTourPage = () => {
                         return (
                           <tr
                             key={idx}
-                            className={`border-t border-slate-700 ${idx % 2 === 0 ? 'bg-slate-800/50' : 'bg-slate-800'
-                              } hover:bg-slate-700/50 transition-colors ${isBest ? 'bg-purple-600/10' : ''
-                              }`}
+                            className={`border-t border-slate-700 ${
+                              idx % 2 === 0 ? 'bg-slate-800/50' : 'bg-slate-800'
+                            } hover:bg-slate-700/50 transition-colors ${
+                              isBest ? 'bg-purple-600/10' : ''
+                            }`}
                           >
                             <td className="px-6 py-4">
                               <div className="flex items-center gap-2">

@@ -148,7 +148,7 @@ const RankingPage = () => {
   };
 
   return (
-    <div className="pt-12 pb-12 bg-slate-900 min-h-screen">
+    <div className="pt-32 pb-16 bg-slate-900 min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
         <button
@@ -172,8 +172,8 @@ const RankingPage = () => {
           <button
             onClick={() => setSelectedGame('all')}
             className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'all'
-              ? 'bg-purple-600 text-white'
-              : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
               }`}
           >
             ALL GAMES
@@ -181,8 +181,8 @@ const RankingPage = () => {
           <button
             onClick={() => setSelectedGame('cs2')}
             className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'cs2'
-              ? 'bg-purple-600 text-white'
-              : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
               }`}
           >
             CS2
@@ -190,8 +190,8 @@ const RankingPage = () => {
           <button
             onClick={() => setSelectedGame('valorant')}
             className={`px-6 py-2 rounded font-bold transition-colors ${selectedGame === 'valorant'
-              ? 'bg-purple-600 text-white'
-              : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
               }`}
           >
             VALORANT

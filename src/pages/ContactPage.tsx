@@ -9,9 +9,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-12 pb-12 min-h-screen">
+    <div className="pt-32 pb-16 min-h-screen">
       <div className="max-w-2xl mx-auto px-4">
-
+        
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">Fale Conosco</h1>
           <p className="text-gray-400">
@@ -21,7 +21,7 @@ const ContactPage = () => {
 
         <div className="bg-slate-800 rounded-xl p-8 border border-slate-700 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-6">
-
+            
             {/* Input de Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">

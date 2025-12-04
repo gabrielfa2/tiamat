@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import ParticlesBackground from '../components/ParticlesBackground';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -55,7 +54,7 @@ const LoginPage = () => {
     if (formData.password.length < 6) {
       throw new Error('Password must be at least 6 characters');
     }
-
+    
     // 4. Confirmação de Senha (Apenas no Cadastro)
     if (!isLogin && formData.password !== formData.confirmPassword) {
       throw new Error('Passwords do not match');
@@ -82,9 +81,22 @@ const LoginPage = () => {
         setTimeout(() => setIsLogin(true), 2000);
       }
     } catch (err) {
+      // O erro lançado pelo validateForm cairá aqui e será exibido
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       console.error('Form error:', errorMessage);
-      alert(errorMessage);
+      // Força a exibição do erro no estado do AuthContext (ou localmente se preferir)
+      // Aqui estamos assumindo que o AuthContext expõe uma forma de setar erro, 
+      // mas como o clearError limpa, vamos confiar que o hook trate erros de API.
+      // Para erros locais de validação, vamos jogar um alerta ou usar um estado local de erro se o context não suportar set manual.
+      // Pelo seu código anterior, o context tem 'error' state, mas não 'setError'. 
+      // Vamos usar o throw para interromper o fluxo, e exibir o erro localmente se necessário.
+      // *AJUSTE*: Como seu hook pode não ter um setError exposto publicamente, 
+      // o ideal seria ter um estado local de erro neste componente ou garantir que o validateForm use o setError do context se disponível.
+      // Vou usar um alert simples para validação local se o context não permitir setar erro manual, 
+      // mas o ideal é que o AuthContext capture isso.
+      // Neste exemplo, vou assumir que o catch abaixo pega erros de API. 
+      // Para validação local, vou lançar um alerta se o contexto não tiver "setError".
+      alert(errorMessage); 
     } finally {
       setLoading(false);
     }
@@ -133,11 +145,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
-
-      {/* Componente de Fundo com Partículas */}
-      <ParticlesBackground />
-
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
       <StyledWrapper>
         <div className="container">
           <div className="login-box">
@@ -160,7 +168,7 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={loading}
-                  maxLength={100}
+                  maxLength={100} // Limite de caracteres
                 />
 
                 {error && <div className="error-message">{error}</div>}
@@ -202,7 +210,7 @@ const LoginPage = () => {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     disabled={loading}
-                    maxLength={50}
+                    maxLength={50} // Limite de 50 caracteres para o nome
                   />
                 )}
                 <input
@@ -213,7 +221,7 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={loading}
-                  maxLength={100}
+                  maxLength={100} // Limite de 100 caracteres para o email
                 />
                 <input
                   type="password"
@@ -223,7 +231,7 @@ const LoginPage = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   disabled={loading}
-                  maxLength={64}
+                  maxLength={64} // Limite de segurança para senha
                 />
                 {!isLogin && (
                   <input
@@ -275,7 +283,7 @@ const LoginPage = () => {
 
       <Link
         to="/"
-        className="absolute top-8 left-8 text-white hover:text-blue-400 transition-colors flex items-center gap-2 z-10"
+        className="absolute top-8 left-8 text-white hover:text-blue-400 transition-colors flex items-center gap-2"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -287,6 +295,7 @@ const LoginPage = () => {
 };
 
 const StyledWrapper = styled.div`
+  /* ... MANTENHA O CSS IGUAL AO QUE VOCÊ JÁ TINHA ... */
   .container {
     --form-width: 350px;
     --aspect-ratio: 1.5;
