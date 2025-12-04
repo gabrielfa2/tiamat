@@ -83,7 +83,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-900 pt-32 pb-12 px-4">
+        <div className="min-h-screen bg-slate-900 pt-12 pb-12 px-4">
             <div className="max-w-3xl mx-auto">
                 <div className="bg-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-700">
                     {/* Header Background */}

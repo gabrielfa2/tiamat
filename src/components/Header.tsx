@@ -321,9 +321,9 @@ const Header = () => {
               </div>
               {/* Imagem Destaque 1 (CS2) */}
               <div className="col-span-4">
-                <Link to="/games/cs2/players" className="group block">
+                <Link to="/recruitment" className="group block">
                   <div className="relative aspect-[3/4] rounded overflow-hidden">
-                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Equipe de Counter Strike 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img src={`${import.meta.env.BASE_URL}cs.webp`} alt="Equipe de Counter Strike 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="text-white font-bold text-sm tracking-wider">COUNTER STRIKE 2</p>
@@ -335,7 +335,7 @@ const Header = () => {
               <div className="col-span-4">
                 <Link to="/games/valorant/players" className="group block">
                   <div className="relative aspect-[3/4] rounded overflow-hidden">
-                    <img src="https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Equipe de Valorant" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img src={`${import.meta.env.BASE_URL}vavagames.jpg`} alt="Equipe de Valorant" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="text-white font-bold text-sm tracking-wider">VALORANT</p>

@@ -9,9 +9,6 @@ const TWITCH_CHANNEL = '';
 // 2. YouTube (Manual)
 const YOUTUBE_VIDEO_ID = '';
 
-// 3. Vídeo do Hover (O "Reveal")
-const HOVER_VIDEO_URL = 'https://pub-61992242d95c4c08a5588448f8a876fc.r2.dev/videohover.mp4';
-
 declare global {
   interface Window {
     Twitch: any;
@@ -22,14 +19,10 @@ type StreamSource = 'twitch' | 'youtube' | 'none';
 
 const HeroSlider = () => {
   const [activeStream, setActiveStream] = useState<StreamSource>('none');
-  const [isHoverVideoVisible, setIsHoverVideoVisible] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const playerRef = useRef<HTMLDivElement>(null);
   const twitchPlayer = useRef<any>(null);
-  const hoverVideoRef = useRef<HTMLVideoElement>(null);
-
-  // Ref para controlar o timer de "saída suave"
-  const fadeTimeoutRef = useRef<number | null>(null);
 
   const imageUrl = `${import.meta.env.BASE_URL}bannertemp.png`;
 
@@ -88,69 +81,10 @@ const HeroSlider = () => {
     return () => clearInterval(initPlayer);
   }, []);
 
-  // --- HANDLERS DA ÁREA MÁGICA (COM TRANSIÇÃO SUAVE) ---
-
-  const handleMagicEnter = () => {
-    // 1. Se o usuário voltou o mouse rápido, cancela o "pause" que estava agendado
-    if (fadeTimeoutRef.current) {
-      clearTimeout(fadeTimeoutRef.current);
-      fadeTimeoutRef.current = null;
-    }
-
-    // 2. Mostra e toca o vídeo
-    if (hoverVideoRef.current) {
-      setIsHoverVideoVisible(true);
-      hoverVideoRef.current.play().catch(e => console.error("Erro play hover:", e));
-    }
-  };
-
-  const handleMagicLeave = () => {
-    // 1. Começa o fade-out visual imediatamente
-    setIsHoverVideoVisible(false);
-
-    // 2. Agenda o pause/reset para DEPOIS que a animação CSS terminar (500ms)
-    // Isso evita o corte "seco"
-    fadeTimeoutRef.current = window.setTimeout(() => {
-      if (hoverVideoRef.current) {
-        hoverVideoRef.current.pause();
-        hoverVideoRef.current.currentTime = 0;
-      }
-    }, 500); // Deve ser igual ao 'duration-500' do className
-  };
-
   return (
     <div className="relative w-full h-[75vh] md:h-auto md:aspect-[21/9] bg-slate-900 overflow-hidden group">
 
-      {/* CAMADA 0: ÁREA MÁGICA (Z-20) - Ajustado para não bloquear o Menu */}
-      {activeStream === 'none' && (
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                     w-[35%] h-[60%] z-20 cursor-pointer"
-          onMouseEnter={handleMagicEnter}
-          onMouseLeave={handleMagicLeave}
-          style={{ backgroundColor: 'transparent' }}
-        />
-      )}
-
-      {/* CAMADA 1: VÍDEO DE HOVER (Z-10) */}
-      {activeStream === 'none' && (
-        <div
-          className={`absolute inset-0 z-10 transition-opacity duration-500 pointer-events-none ${isHoverVideoVisible ? 'opacity-100' : 'opacity-0'
-            }`}
-        >
-          <video
-            ref={hoverVideoRef}
-            src={HOVER_VIDEO_URL}
-            className="w-full h-full object-cover"
-            muted
-            playsInline
-          // SEM LOOP: Para ele congelar no último frame se o mouse ficar muito tempo
-          />
-          <div className="absolute inset-0 bg-black/10"></div>
-        </div>
-      )}
-
-      {/* CAMADA 2: PLAYER DA TWITCH (Z-0) */}
+      {/* CAMADA 1: PLAYER DA TWITCH (Z-0) */}
       <div
         ref={playerRef}
         id="twitch-embed"
@@ -158,7 +92,7 @@ const HeroSlider = () => {
           }`}
       />
 
-      {/* CAMADA 3: PLAYER DO YOUTUBE (Z-0) */}
+      {/* CAMADA 2: PLAYER DO YOUTUBE (Z-0) */}
       {activeStream === 'youtube' && YOUTUBE_VIDEO_ID && (
         <div className="absolute inset-0 z-0 w-full h-full">
           <iframe
@@ -173,15 +107,44 @@ const HeroSlider = () => {
         </div>
       )}
 
-      {/* CAMADA 4: BANNER PADRÃO (Z-0) */}
+      {/* CAMADA 3: BANNER PADRÃO COM EFEITO REVEAL (Z-0) */}
       <div
         className={`absolute inset-0 w-full h-full transition-opacity duration-1000 z-0 ${activeStream === 'none' ? 'opacity-100' : 'opacity-0'
           }`}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         <div
-          className="w-full h-full bg-cover bg-center"
+          className="w-full h-full bg-cover bg-center relative"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
+          {/* Overlay escuro ao hover */}
+          <div
+            className={`absolute inset-0 bg-black transition-opacity duration-500 ${isHovering ? 'opacity-10' : 'opacity-0'
+              }`}
+          ></div>
+
+          {/* Texto TIAMAT com efeito de reveal (escrita) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+            <div
+              className={`relative transition-all duration-1000 ease-out ${isHovering ? 'max-w-full opacity-100' : 'max-w-0 opacity-0'
+                }`}
+              style={{
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <h1
+                className="font-sedgwick text-8xl md:text-9xl text-white px-8 -pt-8"
+                style={{
+                  filter: 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.9)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.6))',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                TIAMAT
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -13,9 +13,11 @@ const HomePage = () => {
       <HeroSlider />
       <div className="hidden md:block">
         <VideoSection />
-        <TeamBanner />
       </div>
       <ProductsSection />
+      <div className="hidden md:block">
+        <TeamBanner />
+      </div>
       <CollectionsSection />
       <Footer />
     </>
