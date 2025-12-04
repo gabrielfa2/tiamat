@@ -117,7 +117,7 @@ const GamePlayersPage = () => {
 
   if (!currentGame) {
     return (
-      <div className="pt-32 pb-16 text-center">
+      <div className="pt-12 pb-12 text-center">
         <h1 className="text-4xl font-bold text-white mb-4">Game Not Found</h1>
         <button
           onClick={() => navigate('/games')}
@@ -130,7 +130,7 @@ const GamePlayersPage = () => {
   }
 
   return (
-    <div className="pt-32 pb-16">
+    <div className="pt-12 pb-12">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
         <button

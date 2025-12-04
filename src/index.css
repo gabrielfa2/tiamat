@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Game Inventory UI Utilities */
-@import './game-ui.css';
-
 @keyframes marquee {
   0% {
     transform: translateX(100%);
   }
-
   100% {
     transform: translateX(-100%);
   }
@@ -98,7 +94,6 @@ html {
     opacity: 0;
     transform: translateY(30px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -111,12 +106,9 @@ html {
 
 /* Hero section animations */
 @keyframes heroGlow {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0.8;
   }
-
   50% {
     opacity: 1;
   }
@@ -161,12 +153,9 @@ html {
 
 /* Loading animations */
 @keyframes pulse-purple {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.5;
   }
@@ -181,11 +170,11 @@ html {
   .animate-marquee {
     animation-duration: 15s;
   }
-
+  
   .text-responsive-xl {
     font-size: clamp(1.5rem, 4vw, 3rem);
   }
-
+  
   .text-responsive-lg {
     font-size: clamp(1.2rem, 3vw, 2rem);
   }
@@ -200,7 +189,6 @@ a:focus {
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-
   .bg-gradient-to-r,
   .bg-gradient-to-br,
   .bg-gradient-to-t {
@@ -210,13 +198,12 @@ a:focus {
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-
   .animate-marquee,
   .hero-glow,
   .fade-in-up {
     animation: none;
   }
-
+  
   .hover-lift:hover {
     transform: none;
   }
@@ -231,7 +218,7 @@ a:focus {
   width: 100%;
   height: 100%;
   /* O fundo agora é transparente, pois o body já tem a cor certa */
-  background-color: transparent;
+  background-color: transparent; 
   display: flex;
   justify-content: center;
   align-items: center;

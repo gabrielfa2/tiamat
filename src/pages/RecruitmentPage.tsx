@@ -4,9 +4,9 @@ import { Search, UserPlus, Target, ChevronRight } from 'lucide-react';
 
 const RecruitmentPage = () => {
   return (
-    <div className="pt-32 pb-16 min-h-screen bg-slate-900 flex items-center justify-center">
+    <div className="pt-12 pb-12 min-h-screen bg-slate-900 flex items-center justify-center">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        
+
         {/* Ícone de Destaque */}
         <div className="relative inline-block mb-8">
           <div className="absolute inset-0 bg-purple-600 blur-2xl opacity-20 rounded-full"></div>
@@ -22,9 +22,9 @@ const RecruitmentPage = () => {
         <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
           ROSTER <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">INCOMPLETE</span>
         </h1>
-        
+
         <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Atualmente não temos uma equipe ativa para esta modalidade. 
+          Atualmente não temos uma equipe ativa para esta modalidade.
           No entanto, a Tiamat está sempre em busca de novos talentos para expandir nosso domínio.
         </p>
 
@@ -45,16 +45,16 @@ const RecruitmentPage = () => {
 
         {/* Botões de Ação */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link 
-            to="/about/contact" 
+          <Link
+            to="/about/contact"
             className="group bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center gap-2 shadow-lg shadow-purple-900/20"
           >
             APLICAR PARA A VAGA
             <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-          
-          <Link 
-            to="/games" 
+
+          <Link
+            to="/games"
             className="text-gray-400 hover:text-white font-semibold py-4 px-8 transition-colors"
           >
             Voltar para Jogos

@@ -123,7 +123,7 @@ const ProductDetailPage = () => {
   const rarityColors = getRarityFillColor(product.rarity);
 
   return (
-    <div className="pt-32 pb-16 tech-grid-bg min-h-screen">
+    <div className="pt-12 pb-12 tech-grid-bg min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
         {/* Back Button */}
         <button
