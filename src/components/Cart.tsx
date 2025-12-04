@@ -69,12 +69,12 @@ const Cart = () => {
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-[70]"
+        className="fixed inset-0 bg-black bg-opacity-50 z-[90]"
         onClick={() => dispatch({ type: 'CLOSE_CART' })}
       />
 
       {/* Cart Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-slate-900 z-[70] transform transition-transform duration-300 ease-in-out">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-slate-900 z-[90] transform transition-transform duration-300 ease-in-out">
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-slate-700">
@@ -186,7 +186,7 @@ const Cart = () => {
       {showSuccessModal && (
         <>
           {/* Modal Overlay */}
-          <div className="fixed inset-0 bg-black bg-opacity-70 z-[80] flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-300">
               {/* Header with gradient */}
               <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-center">
